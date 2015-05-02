@@ -1,0 +1,143 @@
+#Transaction {
+    .bootstrap-select {
+        padding: 0;
+    }
+    > .row:last-child {
+        @include overflow-with-ios;
+    }
+    .form-control-feedback {
+        top: 0;
+    }
+    .transaction-display {
+        margin-top: 5px;
+    }
+    input.form-control {
+        height: 42px;
+    }
+    .debit-button,
+    .credit-button {
+        span {
+            display: block;
+            font-size: 6px;
+        }
+    }
+    .row:first-child {
+        .col-xs-12 {
+            border-radius: 25px 25px;
+            height: 50px;
+            border: 2px solid;
+            transition: width 1s;
+            margin-bottom: 5px;
+            .div {
+                height: inherit;
+            }
+            p {
+                position: absolute;
+                display: inline;
+                margin: 0;
+                bottom: 0;
+                background-color: #fcfcfc;
+                box-shadow: 0 0 5px #3D3D3D;
+                padding: 0 5px 0 5px;
+            }
+            &:first-child {
+                border-color: $state-danger-bg;
+                float: right;
+                p {
+                    right: 25px;
+                }
+            }
+            &:last-child {
+                border-color: $brand-primary;
+                p {
+                    left: 25px;
+                }
+            }
+            &.shrink {
+                width: 50px;
+                .transaction-button {
+                    @include rotate(360deg);
+                }
+            }
+        }
+        .transaction-button {
+            transition: all 2s;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            width: 50px;
+            left: -2px;
+            top: -2px;
+            @include rotate(0deg);
+            i {
+                top: 18px;
+            }
+            &.right {
+                right: -2px;
+                left: auto;
+            }
+        }
+    }
+    .transaction {
+        margin-bottom: 5px;
+        &.delete {
+            @include transition(width 2s);
+            float: right;
+            width: 140px;
+        }
+        .transaction-container {
+            box-shadow: 0px 0px 5px #3d3d3d;
+            &.in {
+                border: 1px solid $brand-primary;
+                .transaction-action {
+                    border-left: 1px solid $brand-primary;
+                }
+                h3:first-child {
+                    border-bottom: 1px solid $brand-primary;
+                }
+            }
+            &.out {
+                border: 1px solid $state-danger-bg;
+                .transaction-action {
+                    border-left: 1px solid $state-danger-bg;
+                }
+                h3:first-child {
+                    border-bottom: 1px solid $state-danger-bg;
+                }
+            }
+            border-radius: 15px;
+            height: 82px;
+            .transaction-type,
+            .transaction-action {
+                display: inline-block;
+                height: 80px;
+                width: 50px;
+                text-align: center;
+            }
+            .transaction-type {
+                border-radius: 15px 0px 0px 15px;
+                width: 15px;
+            }
+            .transaction-action {
+                border-radius: 0px 15px 15px 0px;
+                &:hover, &:active {
+                    background-color: #3D3D3D;
+                    color: #fcfcfc;
+                }
+            }
+            hgroup {
+                position: relative;
+                top: -85px;
+                margin: 0 60px 0 30px;
+                h3 {
+                    margin: 0;
+                    line-height: 40px;
+                }
+            }
+            i {
+                position: relative;
+                top: 25%;
+            }
+        }
+    }
+}

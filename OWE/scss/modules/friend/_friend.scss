@@ -1,0 +1,6 @@
+#Friends {
+	.friendList {
+		margin-top: 5px;
+        @include overflow-with-ios();
+	}
+}

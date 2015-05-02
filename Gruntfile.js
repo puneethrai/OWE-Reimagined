@@ -42,7 +42,7 @@ module.exports = function (grunt) {
                     sourcemap: "none"
                 },
                 files: { // Dictionary of files
-                    'www/css/index.css': 'www/css/index.scss', // 'destination': 'source'
+                    'OWE/www/css/index.css': 'OWE/scss/index.scss', // 'destination': 'source'
                 }
             }
         },
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
                 tasks: ['travis']
             },
             sass: {
-                files: ['www/css/*.scss', 'www/css/scss/**'],
+                files: ['scss/**'],
                 tasks: ['sass']
             }
         },
@@ -152,6 +152,25 @@ module.exports = function (grunt) {
                     args: ['--device']
                 }
             }
+        },
+        requirejs: {
+            compile: {
+                options: {
+                    baseUrl: "OWE/www/",
+                    out: "OWE/www/main-build.js",
+                    name: "app/main",
+                    paths: {
+                        domReady: './libs/require/domReady',
+                        Boiler: './app/core/_boiler_',
+                        text: "./libs/require/text",
+                        i18n: "./libs/require/i18n",
+                        path: "./libs/require/path",
+                        jquery: './libs/jquery/jquery-min',
+                        underscore: './libs/underscore/underscore-min',
+                        backbone: './libs/backbone/backbone-min',
+                    },
+                }
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -159,6 +178,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-cordovacli');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
     // Default task(s).
     grunt.registerTask('default', ['sass']);
     grunt.registerTask('travis', ['jasmine']);

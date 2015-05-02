@@ -1,0 +1,43 @@
+@mixin overflow-with-ios {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;
+    /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;
+    /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;
+    /* prevent copy paste, to allow, change 'none' to 'text' */
+    overflow: hidden;
+    background-color:rgb(255,255,255);
+}
+nav{
+    ul {
+        padding-top: 5px;
+    }
+    li {
+        >a.active{            
+            text-decoration: none;
+            background-color: #eee;
+        }
+    }
+    li:first-child .glyphicon {
+        top: 4px;
+    }
+}
+#Dynamic {
+    padding-top: 55px; 
+}
+.slide-right {
+    @include translate3d(100%,0,0);
+}
+.slide-left {
+    @include translate3d(-100%,0,0);
+}

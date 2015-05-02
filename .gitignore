@@ -4,3 +4,5 @@ node_modules/
 OWE/platforms
 OWE/hooks
 OWE/plugins
+OWE/www/main-build.js
+OWE/www/css/index.css

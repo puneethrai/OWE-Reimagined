@@ -15,12 +15,31 @@ require.config({
         text : './libs/require/text',
         i18n : './libs/require/i18n',
         path : './libs/require/path',
+        domReady : './libs/require/domReady',
         // namespace that aggregate core classes that are in frequent use
         Boiler : './app/core/_boiler_',
         //Framework
         jquery : './libs/jquery/jquery-min',
         underscore : './libs/underscore/underscore-min',
-        backbone : './libs/backbone/backbone-min'
+        backbone : './libs/backbone/backbone-min',
+        localforage : './libs/localforage/localforage',
+        localforagebackbone : './libs/localforage/localforage.backbone',
+        shim: {
+            backbone: {
+                //These script dependencies should be loaded before loading
+                //backbone.js
+                deps: ['underscore', 'jquery'],
+                //Once loaded, use the global 'Backbone' as the
+                //module value.
+                exports: 'Backbone'
+            },
+            underscore: {
+                exports: '_'
+            },
+            localforagebackbone: {
+                deps: ['localforage']
+            }
+        }
     }
 });
 
@@ -43,10 +62,11 @@ define(function (require) {
      * Note: when we define the variables, we use PascalCase for namespaces ('Boiler' in the case) and classes,
      * whereas object instances ('settings' and 'modules') are represented with camelCase variable names.
      */
-    var domReady = require("./libs/require/domReady"); // requirejs domReady plugin to know when DOM is ready
+    // requirejs domReady plugin to know when DOM is ready
+    var domReady = require('domReady'),
+        application = require('./app/application');
     //Here we use the requirejs domReady plugin to run our code, once the DOM is ready to be used.
     domReady(function () {
-        var application = require('./app/application');
         application.initialize();
     });
 });
