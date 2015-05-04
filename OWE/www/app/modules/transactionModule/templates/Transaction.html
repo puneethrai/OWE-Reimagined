@@ -1,0 +1,11 @@
+<div class="transaction-container <%if(type == '+'){%>in<%} else {%>out<%}%>">
+	<div class="transaction-type <%if(type == '+'){%>bg-primary<%} else {%>bg-danger<%}%>">
+	</div>
+	<div class="transaction-action pull-right dummyDelete">
+		<i class=" fa fa-trash fa-3x"></i>
+	</div>
+	<hgroup>
+		<h3 class="dummyFriendName">&nbsp</h3>
+		<h3 class="dummyUserAmount"><i class="fa fa-inr"></i> <%=amount%></h3>
+	</hgroup>
+</div>

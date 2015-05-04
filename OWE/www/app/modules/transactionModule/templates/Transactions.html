@@ -1,0 +1,41 @@
+
+    <div class="row">
+        <div class=" col-xs-12 shrink">
+            <div class="text-center bg-danger transaction-button left">
+                <i class="glyphicon glyphicon-log-out"></i>
+            </div>
+            <h4 class="dummyTCount text-center">0</h4>
+            <p>Debit</p>
+        </div>
+        <div class=" col-xs-12 shrink">
+            <div class="text-center bg-primary transaction-button right">
+                <i class="glyphicon glyphicon-log-in"></i>
+            </div>
+            <h4 class="dummyYCount text-center">0</h4>
+            <p>Credit</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="input-group">
+                <div class="form-group has-feedback">
+                    <input type="tel" class="form-control dummyAmount input-lg" placeholder="amount">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+                <span class="input-group-btn">
+                    <button class="btn btn-default dummyDebt debit-button" type="button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>Debt</span>
+                    </button>
+                    <button class="btn btn-default dummyCredit credit-button" type="button">
+                        <i class="glyphicon glyphicon-minus"></i>
+                        <span>Credit</span>
+                    </button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-xs-12 -->
+        <div class="col-xs-12">
+            <select class="col-xs-12 dummyFriends show-tick" data-live-search="true" data-dropup-auto="false"></select>
+        </div>
+    </div><!-- /.row -->
+    <div class="dummyTransaction row transaction-display"></div>

@@ -1,11 +1,6 @@
-/*
- * Definition of the base module. Base module contain some common components some one may use in
- * creating own application. These components are not a core part of BoilerplateJS, but available as samples.
- */
-define(function (require) {
+/*globals define*/
+define(['Boiler', './router/Router.Transactions'], function (Boiler, TransactionRouter) {
 
-    // Load the dependencies
-    var Boiler = require('Boiler');
 
     // Definition of the base Module as an object, this is the return value of this AMD script
     return {
