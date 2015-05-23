@@ -1,12 +1,4 @@
-//if user has saved the language preference before, lets use that to configure requirejs i18n
-var userLang = localStorage.getItem("user-language");
-if (userLang) {
-    //hack: we do this outside the define block below to avoid requirejs error
-    require.config({
-        locale : userLang
-    });
-}
-
+/*globals define*/
 define(function(require) {
 
     /**

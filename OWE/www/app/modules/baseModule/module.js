@@ -2,6 +2,7 @@
  * Definition of the base module. Base module contain some common components some one may use in
  * creating own application. These components are not a core part of BoilerplateJS, but available as samples.
  */
+/*globals define*/
 define(function (require) {
 
     // Load the dependencies
@@ -12,6 +13,9 @@ define(function (require) {
         initialize : function (parentContext) {
             //create module context by assiciating with the parent context
             var context = new Boiler.Context(parentContext);
+            window.app.baseModule = {
+                context: context
+            };
         }
     };
 

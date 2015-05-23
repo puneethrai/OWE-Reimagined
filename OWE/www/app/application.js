@@ -6,13 +6,14 @@ define(function (require) {
     var Boiler = require("Boiler"), // BoilerplateJS namespace used to access core classes, see above for the definition
         settings = require("./settings"), //global settings file of the product suite
         modules = require("./modules/modules"), //file where all of your product modules will be listed
-        Backbone = require("backbone");
+        $ = require('jquery'),
+        Backbone = require("backbone"),
+        DataLayer = require("dataLayer");
     //Load the files which won't be explicitly called by other file
     require("localforagebackbone");
-
     //return an object with the public interface for an 'application' object. Read about module pattern for details.
     return {
-        initialize : function () {
+        initialize: function () {
             document.addEventListener('deviceready', this.startLoadingModules, false);
         },
         startLoadingModules: function () {
@@ -23,18 +24,34 @@ define(function (require) {
             var globalContext = new Boiler.Context(),
                 index;
             globalContext.addSettings(settings);
-
+            window.app = {
+                context: globalContext,
+                scrollDown: function (scrollToValue, scrollwindow) {
+                    if ($.fn.animate) {
+                        // Or you can animate the scrolling:Performance might get affected
+                        $(scrollwindow || "body").animate({
+                            scrollTop: scrollToValue
+                        });
+                    } else {
+                        $(scrollwindow || "body").scrollTop(scrollToValue);
+                    }
+                },
+                scrollStop: function (scrollwindow) {
+                    $(scrollwindow || "body").stop();
+                }
+            };
             /* In BoilerplateJS, your product module hierachy is associated to a 'Context' heirachy. Below
              * we create the global 'Context' and load child contexts (representing your product sub modules)
              * to create a 'Context' tree (product modules as a tree).
              */
-            for (index = 0; index < modules.length; index++) {
-                modules[index].initialize(globalContext);
-            }
-            if (!Backbone.History.started) {
-                Backbone.history.start();
-            }
+            DataLayer.initialize().done(function () {
+                for (index = 0; index < modules.length; index++) {
+                    modules[index].initialize(globalContext);
+                }
+                if (!Backbone.History.started) {
+                    Backbone.history.start();
+                }
+            });
         }
     };
 });
-

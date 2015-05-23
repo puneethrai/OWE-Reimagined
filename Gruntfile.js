@@ -12,7 +12,7 @@ module.exports = function (grunt) {
             }
         },
 
-        jasmine: {
+        /*jasmine: {
             components: {
                 src: [
                     'www/js/*js',
@@ -32,6 +32,75 @@ module.exports = function (grunt) {
                     ],
                     template: "spec/SpecRunner.tmpl"
                     //helpers: 'test/spec/*.js'
+                }
+            }
+        },*/
+        jasmine: {
+            taskName: {
+                src: [
+                    'OWE/www/libs/jquery/*.js',
+                    'OWE/spec/vendor/jasmine-jquery.js',],
+                options: {
+                    specs: 'OWE/spec/spec/*.js',
+                    //helpers: '',
+                    //host: 'http://127.0.0.1:9999/',
+                    template: require('grunt-template-jasmine-requirejs'),
+                    templateOptions: {
+                        requireConfig: {
+                            baseUrl: "OWE/www/",
+                            /*
+                             * Let's define short alias for commonly used AMD libraries and name-spaces. Using
+                             * these alias, we do not need to specify lengthy paths, when referring a child
+                             * files. We will 'import' these scripts, using the alias, later in our application.
+                             */
+                            paths: {
+                                // requirejs plugins in use
+                                text: './libs/require/text',
+                                i18n: './libs/require/i18n',
+                                path: './libs/require/path',
+                                domReady: './libs/require/domReady',
+                                // namespace that aggregate core classes that are in frequent use
+                                Boiler: './app/core/_boiler_',
+                                //Framework
+                                jquery: './libs/jquery/jquery-min',
+                                underscore: './libs/underscore/underscore-min',
+                                backbone: './libs/backbone/backbone-min',
+                                localforage: './libs/localforage/localforage',
+                                localforagebackbone: './libs/localforage/localforage.backbone',
+                                bootstrap: './libs/boostrap/bootstrap.min',
+                                bootstrapSelect: './libs/boostrap/bootstrap-select',
+                                jqueryTap: './libs/jquery/jquery.tap',
+                                //Helpers
+                                templates: './app/core/templates-handler',
+                                dataLayer: './app/core/data-abstraction',
+                                shim: {
+                                    jquery: {
+                                        exports: ['jQuery', '$']
+                                    },
+                                    underscore: {
+                                        exports: '_'
+                                    },
+                                    backbone: {
+                                        //These script dependencies should be loaded before loading
+                                        //backbone.js
+                                        deps: ['underscore', 'jquery'],
+                                        //Once loaded, use the global 'Backbone' as the
+                                        //module value.
+                                        exports: 'Backbone'
+                                    },
+                                    localforagebackbone: {
+                                        deps: ['localforage']
+                                    },
+                                    bootstrap: {
+                                        deps: ['jquery']
+                                    },
+                                    bootstrapSelect: {
+                                        deps: ['jquery', 'bootstrap']
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -148,8 +217,13 @@ module.exports = function (grunt) {
             run_browser: {
                 options: {
                     command: 'run',
-                    platforms: ['browser'],
-                    args: ['--device']
+                    platforms: ['browser']
+                }
+            },
+            build_browser: {
+                options: {
+                    command: 'build',
+                    platforms: ['browser']
                 }
             }
         },
@@ -186,4 +260,4 @@ module.exports = function (grunt) {
     grunt.registerTask("dev", ["connect", "watch:tests"]);
     grunt.registerTask("prepare", ["cordovacli:add_plugins", "cordovacli:add_platforms"]);
 
-};
+    };

@@ -24,7 +24,19 @@ require.config({
         backbone : './libs/backbone/backbone-min',
         localforage : './libs/localforage/localforage',
         localforagebackbone : './libs/localforage/localforage.backbone',
+        bootstrap: './libs/boostrap/bootstrap.min',
+        bootstrapSelect: './libs/boostrap/bootstrap-select',
+        jqueryTap: './libs/jquery/jquery.tap',
+        //Helpers
+        templates: './app/core/templates-handler',
+        dataLayer: './app/core/data-abstraction',
         shim: {
+            jquery: {
+                exports: ['jQuery', '$']
+            },
+            underscore: {
+                exports: '_'
+            },
             backbone: {
                 //These script dependencies should be loaded before loading
                 //backbone.js
@@ -33,11 +45,17 @@ require.config({
                 //module value.
                 exports: 'Backbone'
             },
-            underscore: {
-                exports: '_'
-            },
             localforagebackbone: {
                 deps: ['localforage']
+            },
+            bootstrap: {
+                deps: ['jquery']
+            },
+            bootstrapSelect: {
+                deps: ['jquery', 'bootstrap']
+            },
+            jqueryTap: {
+                deps: ['jquery']
             }
         }
     }

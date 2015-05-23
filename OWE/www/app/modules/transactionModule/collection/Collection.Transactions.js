@@ -1,5 +1,5 @@
 /*globals define*/
-define(['backbone', '../model/Model.Transaction'], function (Backbone, TransactionModel) {
+define(['backbone', '../model/Model.Transaction', 'dataLayer'], function (Backbone, TransactionModel, DataLayer) {
     var TransactionCollection = Backbone.Collection.extend({
         model: function (attrs, options) {
             return new TransactionModel(attrs, options);

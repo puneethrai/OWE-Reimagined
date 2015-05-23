@@ -1,5 +1,5 @@
 /*globals define*/
-define(['backbone'], function (Backbone) {
+define(['jquery', 'backbone', 'dataLayer'], function ($, Backbone, DataLayer) {
     var TransactionModel = Backbone.Model.extend({
         initialize: function initialize(argument) {
             /*jslint unparam:true*/
