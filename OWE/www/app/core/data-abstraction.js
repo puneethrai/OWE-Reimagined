@@ -212,6 +212,22 @@ define(['jquery'], function ($) {
             return defer.promise();
 
         },
+        removeAllTable: function () {
+            var self = this,
+                defer = $.Deferred();
+            self._executeSql(self.QUERIES.dropTransactionTable, null, function (tx, friends) {
+                /*jslint unparam:true*/
+                self._executeSql(self.QUERIES.dropFriendTable, null, function (tx, friends) {
+                    defer.resolve();
+                }, function () {
+                    defer.reject();
+                });
+            }, function () {
+                defer.reject();
+            });
+            return defer.promise();
+
+        },
         _executeSql: function (SQL, params, successCallback, errorCallback, options) {
             var self = this;
             var success = function (tx, result) {

@@ -1,9 +1,6 @@
 /*globals define*/
 /*jslint browser:true*/
 define(['Boiler', 'templates', './settings', './router/Router.Transactions'], function (Boiler, templates, settings, TransactionRouter) {
-
-
-    // Definition of the base Module as an object, this is the return value of this AMD script
     return {
         initialize: function (parentContext) {
             //create module context by assiciating with the parent context
@@ -14,6 +11,9 @@ define(['Boiler', 'templates', './settings', './router/Router.Transactions'], fu
                 context: context,
                 router: new TransactionRouter()
             };
+            window.app.transactions.context.listen(window.app.Events.TransactionsData, function (data) {
+                window.app.transactions.router.TransactionCollection(data);
+            });
         }
     };
 
