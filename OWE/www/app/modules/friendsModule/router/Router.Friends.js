@@ -4,7 +4,6 @@ define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views
         initialize: function initialize() {
             var self = this;
             self.FriendCollection = new FriendCollection();
-            self.FriendCollection.fetch();
         },
         routes: {
             friends: "onFriend"

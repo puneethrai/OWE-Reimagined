@@ -1,10 +1,11 @@
 /*globals define*/
-define(['jquery', 'backbone', 'dataLayer'], function ($, Backbone, DataLayer) {
+define(['backbone'], function (Backbone) {
     var TransactionModel = Backbone.Model.extend({
         initialize: function initialize(argument) {
             /*jslint unparam:true*/
             return this;
         },
+        sync: Backbone.localforage.sync('Transaction'),
         TYPE: {
             DEBT: "-",
             CREDIT: "+"
@@ -27,32 +28,6 @@ define(['jquery', 'backbone', 'dataLayer'], function ($, Backbone, DataLayer) {
             }
             if (attrs.type !== this.TYPE.DEBT && attrs.type !== this.TYPE.CREDIT) {
                 return -2;
-            }
-        },
-        save: function save() {
-            var self = this,
-                defer = $.Deferred();
-            if (this.isValid()) {
-                DataLayer.addTransaction(this.toJSON()).done(function (transaction) {
-                    self.set("id", transaction.id || transaction);
-                }).fail(function () {
-                    self.destroy();
-                });
-            } else {
-                defer.reject();
-            }
-            return defer.promise();
-
-        },
-        destroy: function () {
-            var self = this;
-            if (!this.isNew()) {
-                DataLayer.removeTransaction(this.get("id")).done(function (transaction) {
-                    /*jslint unparam:true*/
-                    self.trigger("destroy", self);
-                });
-            } else {
-                self.trigger("destroy", self);
             }
         }
     });

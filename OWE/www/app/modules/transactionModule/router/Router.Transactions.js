@@ -5,7 +5,6 @@ define(['jquery', 'backbone', '../collection/Collection.Transactions', '../view/
             /*jslint unparam:true*/
             var self = this;
             self.TransactionCollection = new TransactionCollection();
-            self.TransactionCollection.fetch();
         },
         routes: {
             transaction: "onTransaction"

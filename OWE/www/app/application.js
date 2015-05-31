@@ -7,9 +7,9 @@ define(function (require) {
         settings = require("./settings"), //global settings file of the product suite
         modules = require("./modules/modules"), //file where all of your product modules will be listed
         $ = require('jquery'),
-        Backbone = require("backbone"),
-        DataLayer = require("dataLayer");
+        Backbone = require("backbone");
     //Load the files which won't be explicitly called by other file
+    require("localforage");
     require("localforagebackbone");
     //return an object with the public interface for an 'application' object. Read about module pattern for details.
     return {
@@ -21,8 +21,16 @@ define(function (require) {
                 Events: {
                     Migration: {
                         TransactionsData: "Events.Migration.TransactionData",
-                        FriendsData: "Events.Migration.FriendsData"
+                        FriendsData: "Events.Migration.FriendsData",
+                        Migrated: "Events.Migration.Migrated"
                     }
+                },
+                ID: {
+                    LocalstorageModel: "Localstorage",
+                    TransactionModel: "Transaction",
+                    TransactionCollection: "Transactions",
+                    FriendModel: "Friend",
+                    FriendCollection: "Friends"
                 },
                 scrollDown: function (scrollToValue, scrollwindow) {
                     if ($.fn.animate) {
@@ -50,10 +58,10 @@ define(function (require) {
              * to create a 'Context' tree (product modules as a tree).
              */
             var index = 0;
-            DataLayer.initialize().done(function () {
-                for (index = 0; index < modules.length; index++) {
-                    modules[index].initialize(window.app.context);
-                }
+            for (index = (modules.length - 1); index >= 0; index--) {
+                modules[index].initialize(window.app.context);
+            }
+            window.app.context.listen(window.app.Events.Migration.Migrated, function () {
                 if (!Backbone.History.started) {
                     Backbone.history.start();
                 }

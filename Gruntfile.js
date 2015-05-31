@@ -123,6 +123,10 @@ module.exports = function (grunt) {
             sass: {
                 files: ['scss/**'],
                 tasks: ['sass']
+            },
+            prepbrowser: {
+                files: ['OWE/www/**'],
+                tasks: ['cordovacli:prepare_browser']
             }
         },
         cordovacli: {
@@ -223,6 +227,12 @@ module.exports = function (grunt) {
             build_browser: {
                 options: {
                     command: 'build',
+                    platforms: ['browser']
+                }
+            },
+            prepare_browser: {
+                options: {
+                    command: 'prepare',
                     platforms: ['browser']
                 }
             }

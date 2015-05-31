@@ -1,10 +1,11 @@
-/*globals define, DataLayer*/
-define(['jquery', 'backbone', 'dataLayer'], function ($, Backbone, DataLayer) {
+/*globals define*/
+define(['backbone'], function (Backbone) {
     var FriendModel = Backbone.Model.extend({
         initialize: function initialize(argument) {
             /*jslint unparam:true*/
             return this;
         },
+        sync: Backbone.localforage.sync('Friend'),
         TYPE: {
             DEBT: "+",
             CREDIT: "-"
@@ -21,29 +22,6 @@ define(['jquery', 'backbone', 'dataLayer'], function ($, Backbone, DataLayer) {
             /*jslint unparam:true*/
             if (!attrs.name || attrs.name === "") {
                 return -1;
-            }
-        },
-        save: function save() {
-            var self = this,
-                defer = $.Deferred();
-            DataLayer.addFriend(this.toJSON()).done(function (friend) {
-                self.set("id", friend.id || friend);
-                defer.resolve();
-            }).fail(function () {
-                defer.reject();
-                self.destroy();
-            });
-            return defer.promise();
-        },
-        destroy: function () {
-            var self = this;
-            if (!this.isNew()) {
-                DataLayer.removeFriend(this.get("id")).done(function (friend) {
-                    /*jslint unparam:true*/
-                    self.trigger("destroy", self);
-                });
-            } else {
-                self.trigger("destroy", self);
             }
         }
     });

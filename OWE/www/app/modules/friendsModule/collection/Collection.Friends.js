@@ -1,10 +1,9 @@
 /*globals define*/
-define(['backbone', '../model/Model.Friend', 'dataLayer'], function (Backbone, FriendModel, DataLayer) {
+define(['backbone', '../model/Model.Friend'], function (Backbone, FriendModel) {
 
     var FriendCollection = Backbone.Collection.extend({
-        model: function (attrs, options) {
-            return new FriendModel(attrs, options);
-        },
+        sync: Backbone.localforage.sync('Friends'),
+        model: FriendModel,
         create: function (attrs, options) {
             var friendModel = null,
                 self = this;
@@ -18,24 +17,6 @@ define(['backbone', '../model/Model.Friend', 'dataLayer'], function (Backbone, F
             } else {
                 return Backbone.Collection.prototype.create.call(this, attrs.options);
             }
-        },
-        fetch: function (options) {
-            var self = this;
-            options = options || {};
-            var success = options.success || function () {
-                    return true;
-                },
-                error = options.error || function () {
-                    return true;
-                };
-            DataLayer.getAllFriends().done(function (friends) {
-                self.add(friends, {
-                    validate: true
-                });
-                success(self.models);
-            }).fail(function (message) {
-                error(message);
-            });
         }
     });
     return FriendCollection;
