@@ -10,8 +10,10 @@ define(['backbone', '../model/Model.Friend'], function (Backbone, FriendModel) {
             if (options && options.wait) {
                 friendModel = new this.model(attrs, options);
                 if (friendModel && friendModel.isValid()) {
-                    friendModel.save().done(function () {
-                        self.add(friendModel);
+                    friendModel.save({
+                        success: function () {
+                            self.add(friendModel);
+                        }
                     });
                 }
             } else {

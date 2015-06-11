@@ -5,6 +5,13 @@ define(['jquery', 'backbone', '../collection/Collection.Transactions', '../view/
             /*jslint unparam:true*/
             var self = this;
             self.TransactionCollection = new TransactionCollection();
+            window.app.transactions.context.listen(window.app.Events.Migration.TransactionsData, function (data) {
+                self.TransactionCollection.add(data);
+                self.TransactionCollection.sync("create", self.TransactionCollection);
+            });
+            window.app.context.listen(window.app.Events.Migration.Migrated, function () {
+                self.TransactionCollection.fetch();
+            });
         },
         routes: {
             transaction: "onTransaction"

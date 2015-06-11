@@ -39,7 +39,15 @@ define(function (require) {
                         window.app.baseModule.context.notify(window.app.Events.Migration.TransactionsData, transactions);
                         DataLayer.getAllFriends().done(function (friends) {
                             window.app.baseModule.context.notify(window.app.Events.Migration.FriendsData, friends);
-                            model.save({migrated: true});
+                            model.save({
+                                migrated: true,
+                                success: function () {
+                                    return true;
+                                },
+                                error: function () {
+                                    return true;
+                                }
+                            });
                         });
                     });
                 });

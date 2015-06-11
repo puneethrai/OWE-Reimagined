@@ -4,6 +4,13 @@ define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views
         initialize: function initialize() {
             var self = this;
             self.FriendCollection = new FriendCollection();
+            window.app.friends.context.listen(window.app.Events.Migration.FriendsData, function (data) {
+                self.FriendCollection.add(data);
+                self.FriendCollection.sync("create", self.FriendCollection);
+            });
+            window.app.context.listen(window.app.Events.Migration.Migrated, function () {
+                self.FriendCollection.fetch();
+            });
         },
         routes: {
             friends: "onFriend"
