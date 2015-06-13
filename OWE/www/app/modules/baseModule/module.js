@@ -33,21 +33,29 @@ define(function (require) {
             });
         },
         startMigration: function (model) {
+            var self = this;
             if (!model.get('migrated')) {
                 DataLayer.initialize().done(function () {
-                    DataLayer.getAllTransaction().done(function (transactions) {
-                        window.app.baseModule.context.notify(window.app.Events.Migration.TransactionsData, transactions);
-                        DataLayer.getAllFriends().done(function (friends) {
-                            window.app.baseModule.context.notify(window.app.Events.Migration.FriendsData, friends);
-                            model.save({
-                                migrated: true,
-                                success: function () {
-                                    return true;
-                                },
-                                error: function () {
-                                    return true;
+                    DataLayer.getAllFriends().done(function (friends) {
+                        window.app.baseModule.context.notify(window.app.Events.Migration.FriendsData, friends);
+                        DataLayer.getAllTransaction().done(function (transactions) {
+                            window.app.baseModule.context.notify(window.app.Events.Migration.TransactionsData, transactions);
+                            navigator.notification.confirm("Migration completed, Total: " + transactions.length + " transaction found and " + friends.length + " friends found. Press cancel to retry", function (index) {
+                                if (index === 1) {
+                                    model.save({
+                                        migrated: true,
+                                        success: function () {
+                                            return true;
+                                        },
+                                        error: function () {
+                                            return true;
+                                        }
+                                    });
+                                } else {
+                                    window.app.baseModule.context.notify(window.app.Events.Migration.Clear);
+                                    self.startMigration(model);
                                 }
-                            });
+                            }, 'Migration completed');
                         });
                     });
                 });

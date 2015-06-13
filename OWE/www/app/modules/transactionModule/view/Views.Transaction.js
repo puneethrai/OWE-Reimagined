@@ -1,5 +1,5 @@
-/*global define,templates, DataLayer*/
-define(['backbone', 'templates', 'dataLayer', 'jquery', 'jqueryTap'], function (Backbone, templates, DataLayer) {
+/*global define,templates*/
+define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, templates) {
     var ViewTransaction = Backbone.View.extend({
         className: "transaction col-xs-12 col-sm-6 col-md-4",
         initialize: function initilization(options) {
@@ -17,15 +17,10 @@ define(['backbone', 'templates', 'dataLayer', 'jquery', 'jqueryTap'], function (
             this.currentTypeClass = this.model.get("type") === this.model.TYPE.DEBT ? "out" : "in";
             setTimeout(function () {
                 var friendModel = self.options.friendCollection.findWhere({
-                    id: parseInt(self.model.get("userid"), 10)
+                    id: self.model.get("userid")
                 });
                 if (friendModel) {
                     self.$el.find(".dummyFriendName").html(friendModel.get("name"));
-                } else {
-                    DataLayer.getFriendByID(parseInt(self.model.get("userid"), 10)).done(function (friend) {
-                        //interested only in success case
-                        self.$el.find(".dummyFriendName").html(friend.name);
-                    });
                 }
             }, 0);
             return this;

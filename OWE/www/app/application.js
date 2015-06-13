@@ -22,7 +22,8 @@ define(function (require) {
                     Migration: {
                         TransactionsData: "Events.Migration.TransactionData",
                         FriendsData: "Events.Migration.FriendsData",
-                        Migrated: "Events.Migration.Migrated"
+                        Migrated: "Events.Migration.Migrated",
+                        Clear: "Events.Migration.Clear",
                     }
                 },
                 ID: {
