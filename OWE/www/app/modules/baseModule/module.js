@@ -43,13 +43,7 @@ define(function (require) {
                             navigator.notification.confirm("Migration completed, Total: " + transactions.length + " transaction found and " + friends.length + " friends found. Press cancel to retry", function (index) {
                                 if (index === 1) {
                                     model.save({
-                                        migrated: true,
-                                        success: function () {
-                                            return true;
-                                        },
-                                        error: function () {
-                                            return true;
-                                        }
+                                        migrated: true
                                     });
                                 } else {
                                     window.app.baseModule.context.notify(window.app.Events.Migration.Clear);

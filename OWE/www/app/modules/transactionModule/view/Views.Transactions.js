@@ -76,7 +76,7 @@ define(['jquery', 'underscore', 'backbone', 'templates', './Views.Transaction', 
             var tempModel = new this.collection.model(this.waitingForNewFriend || {
                 amount: Number(Number(amount).toFixed(4)),
                 type: type,
-                userid: parseInt(userid, 10)
+                userid: userid
             });
             if (tempModel.isValid()) {
                 if (this.newFriend) {
