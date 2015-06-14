@@ -10,6 +10,7 @@ define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views
                 for (index = 0; index < data.length; index++) {
                     tempData = data[index];
                     tempData.oldID = tempData.id;
+                    tempData.migrated = true;
                     delete tempData.id;
                     self.FriendCollection.create(tempData);
                 }

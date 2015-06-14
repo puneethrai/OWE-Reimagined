@@ -20,7 +20,7 @@ define(['backbone'], function (Backbone) {
         },
         validate: function (attrs, options) {
             /*jslint unparam:true*/
-            if (!attrs.name || attrs.name === "") {
+            if (!attrs.name && !attrs.migrated) {
                 return -1;
             }
         }

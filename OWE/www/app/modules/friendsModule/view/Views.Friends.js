@@ -50,8 +50,7 @@ define(['jquery', 'underscore', 'backbone', 'templates', './Views.Friend', 'jque
             this.collection.create({
                 name: name
             }, {
-                validate: true,
-                wait: true
+                validate: true
             });
         },
         onDeleteFriend: function onDeleteTransaction(model) {
