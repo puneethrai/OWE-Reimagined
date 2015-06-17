@@ -1,5 +1,6 @@
 /*global TR, define*/
-define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views.Friends'], function ($, Backbone, FriendCollection, ViewFriends) {
+/*jslint browser:true*/
+define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views.Friends', '../view/Views.Friends.Transactions'], function ($, Backbone, FriendCollection, ViewFriends, FriendsTransaction) {
     var FriendRouter = Backbone.Router.extend({
         initialize: function initialize() {
             var self = this;
@@ -23,12 +24,20 @@ define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views
             });
             window.app.context.listen(window.app.Events.Migration.Migrated, function () {
                 if (!self.FriendCollection.models.length) {
-                    self.FriendCollection.fetch();
+                    self.FriendCollection.fetch({
+                        success: function () {
+                            self.FriendCollection.add({special: 'noname', name: 'No Name'});
+                            Backbone.history.navigate('temp', {trigger:true});
+                            Backbone.history.navigate('', {trigger:true});
+                        }
+                    });
                 }
+                self.FriendCollection.add({special: 'noname', name: 'No Name'});
             });
         },
         routes: {
-            friends: "onFriend"
+            friends: "onFriend",
+            '': "onRenderMainScreen"
         },
         onFriend: function onFriend() {
             var TR = window.app.transactions && window.app.transactions.router;
@@ -45,6 +54,14 @@ define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views
             } else {
                 this.FV.$el.removeClass("hide");
             }
+        },
+        onRenderMainScreen: function () {
+            var TR = window.app.transactions && window.app.transactions.router;
+            this.FT = new FriendsTransaction({
+                parentDiv: 'Left',
+                collection: this.FriendCollection,
+                transactions: TR.TransactionCollection
+            }).render();
         }
     });
     return FriendRouter;
