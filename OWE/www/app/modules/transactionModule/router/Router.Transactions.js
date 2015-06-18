@@ -34,9 +34,9 @@ define(['jquery', 'backbone', '../collection/Collection.Transactions', '../view/
             });
         },
         routes: {
-            transaction: "onTransaction"
+            'transaction(/:id)': "onTransaction"
         },
-        onTransaction: function onTransaction(argument) {
+        _onTransaction: function (argument) {
             /*jslint unparam:true*/
             var FR = window.app.friends && window.app.friends.router;
             if (FR && FR.FV) {
@@ -53,6 +53,10 @@ define(['jquery', 'backbone', '../collection/Collection.Transactions', '../view/
             } else {
                 this.TV.$el.removeClass("hide");
             }
+        },
+        onTransaction: function (id) {
+            var FC = window.app.friends.router.FriendCollection,
+                friendModel = FC.findWhere({id: id}) || FC.findWhere({special: id}) || FC.add({});
         }
     });
     return TransactionRouter;

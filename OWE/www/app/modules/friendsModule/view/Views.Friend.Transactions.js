@@ -1,7 +1,7 @@
 /*global define,templates*/
 define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, templates) {
     var FriendTransactions = Backbone.View.extend({
-        className: "FriendTransactions col-xs-12",
+        className: "FriendTransactions animated pulse",
         initialize: function initilization(options) {
             this.options = options;
             this.template = templates.get('friend', 'FriendTransactions');
@@ -10,6 +10,9 @@ define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, tem
                 remove: this.onRemoveTransaction
             }, this);
             this.total = 0;
+        },
+        events: {
+            'tap': 'onTransactionView'
         },
         render: function () {
             var self = this;
@@ -45,6 +48,10 @@ define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, tem
             if (!this.collection.length) {
                 this.options.onEmpty();
             }
+        },
+        onTransactionView: function () {
+            Backbone.history.navigate('transaction/' + (this.model.id || this.model.get('special')));
+            window.app.transactions.router.onTransaction(this.model.id || this.model.get('special'));
         }
     });
     return FriendTransactions;

@@ -11,6 +11,9 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
             }, this);
             this.friendTransactions = {};
         },
+        events: {
+            'tap .dummyNewTransaction': 'onNewTransactionView'
+        },
         render: function () {
             var self = this;
             self.$el.html(this.template());
@@ -58,6 +61,10 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
                 this._renderView(view);
             }
 
+        },
+        onNewTransactionView: function () {
+            Backbone.history.navigate('transaction');
+            window.app.transactions.router.onTransaction();
         }
     });
     return FriendsTransactions;

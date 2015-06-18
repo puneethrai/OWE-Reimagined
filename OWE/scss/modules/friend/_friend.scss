@@ -1,19 +1,44 @@
 #Friends {
-	.friendList {
-		margin-top: 5px;
+    .friendList {
+        margin-top: 5px;
         @include overflow-with-ios();
-	}
+    }
 }
 #Left {
-	.FriendTransactions {
-		> div {
-			padding: 5%;
-		}
-		.debt {
-			background-color: $debt-color;
-		}
-		.credit {
-			background-color: $credit-color;
-		}
-	}
+    .FriendsTransactions {        
+        nav {
+            padding-top: 4px;
+            .fa-plus {
+                border-radius: 50% 50%;
+                border: 1px solid white;
+                width: 1em;
+                color: #ffffff;
+            }
+        }
+        .FriendTransactions {
+            margin-bottom: 10px;
+            &:last-child {
+                margin-bottom: 0px;
+            }
+            &:first-child {
+                margin-top: 10px;
+            }
+            > div {
+                padding: 1% 2%;
+            }
+            .debt {
+                background-color: $debt-color;
+            }
+            .credit {
+                background-color: $credit-color;
+            }
+            p {
+                span{
+                    position: relative;
+                    top: -5px;
+                    font-weight: bolder;
+                }
+            }
+        }
+    }
 }
