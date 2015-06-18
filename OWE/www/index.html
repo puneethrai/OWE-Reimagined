@@ -15,20 +15,11 @@
 </head>
 
     <body style="-webkit-user-select: none">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <ul class="nav row">
-                    <li class="col-xs-6">
-                        <a class="text-center" href="#transaction">Transaction<i class="glyphicon glyphicon-credit-card pull-right"></i></a>
-                    </li>
-                    <li class="col-xs-6">
-                        <a class="text-center" href="#friends">Friends<i class="glyphicon glyphicon-user pull-right"></i></a>
-                    </li>
-                </ul>
+        <div id="Dynamic" class="container-fluid">
+            <div class="row">
+                <div id="Left" class="col-xs-12 col-sm-4"></div>
+                <div id="Right" class="col-xs-12 col-sm-4"></div>
             </div>
-        </nav>
-        <div id="Dynamic" class="container">
-            <div id="Left"></div>
         </div>
 
         <!-- following library is used by the Mediator class for pub-sub event handling -->

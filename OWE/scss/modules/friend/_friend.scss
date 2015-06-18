@@ -4,3 +4,16 @@
         @include overflow-with-ios();
 	}
 }
+#Left {
+	.FriendTransactions {
+		> div {
+			padding: 5%;
+		}
+		.debt {
+			background-color: $debt-color;
+		}
+		.credit {
+			background-color: $credit-color;
+		}
+	}
+}

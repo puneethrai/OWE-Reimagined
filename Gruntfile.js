@@ -121,8 +121,8 @@ module.exports = function (grunt) {
                 tasks: ['travis']
             },
             sass: {
-                files: ['scss/**'],
-                tasks: ['sass']
+                files: ['OWE/scss/**'],
+                tasks: ['sass:dist']
             },
             prepbrowser: {
                 files: ['OWE/www/**'],

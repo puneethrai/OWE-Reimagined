@@ -32,12 +32,11 @@ nav{
         top: 4px;
     }
 }
-#Dynamic {
-    padding-top: 55px; 
-}
 .slide-right {
     @include translate3d(100%,0,0);
 }
 .slide-left {
     @include translate3d(-100%,0,0);
 }
+$debt-color:         #f2dede !default;
+$credit-color:       #337ab7 !default;
