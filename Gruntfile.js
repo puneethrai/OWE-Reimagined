@@ -113,6 +113,11 @@ module.exports = function (grunt) {
                 files: { // Dictionary of files
                     'OWE/www/css/index.css': 'OWE/scss/index.scss', // 'destination': 'source'
                 }
+            },
+            dev: {
+                files: { // Dictionary of files
+                    'OWE/www/css/index.css': 'OWE/scss/index.scss', // 'destination': 'source'
+                }
             }
         },
         watch: {
@@ -122,7 +127,7 @@ module.exports = function (grunt) {
             },
             sass: {
                 files: ['OWE/scss/**'],
-                tasks: ['sass:dist']
+                tasks: ['sass:dev']
             },
             prepbrowser: {
                 files: ['OWE/www/**'],

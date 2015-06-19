@@ -79,6 +79,12 @@
         }
     }
     .transaction {
+        nav {
+            padding-top: 4px;
+            .fa-user-plus {
+                padding: 5px;
+            }
+        }
         margin-bottom: 5px;
         &.delete {
             @include transition(width 2s);
@@ -138,6 +144,15 @@
                 position: relative;
                 top: 25%;
             }
+        }
+    }
+}
+.transaction {
+    nav {
+        padding-top: 4px;
+        .fa-user-plus {
+            padding: 5px;
+            width: 1.5em;
         }
     }
 }

@@ -16,14 +16,15 @@ body {
     -webkit-user-select: none;
     /* prevent copy paste, to allow, change 'none' to 'text' */
     overflow: hidden;
-    background-color:rgb(255,255,255);
+    background-color: rgb(255, 255, 255);
 }
-nav{
+
+nav {
     ul {
         padding-top: 5px;
     }
     li {
-        >a.active{            
+        > a.active {
             text-decoration: none;
             background-color: #eee;
         }
@@ -32,11 +33,23 @@ nav{
         top: 4px;
     }
 }
+
 .slide-right {
-    @include translate3d(100%,0,0);
+    @include translate3d(100%, 0, 0);
 }
+
 .slide-left {
-    @include translate3d(-100%,0,0);
+    @include translate3d(-100%, 0, 0);
 }
-$debt-color:         #f2dede !default;
-$credit-color:       #337ab7 !default;
+
+$debt-color: #f2dede !default;
+$credit-color: #337ab7 !default;
+
+nav {
+    .fa {
+        border-radius: 50% 50%;
+        border: 1px solid white;
+        width: 1em;
+        color: #ffffff;
+    }
+}

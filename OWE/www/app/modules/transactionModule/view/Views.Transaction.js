@@ -1,52 +1,29 @@
 /*global define,templates*/
-define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, templates) {
+define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, templates, $) {
     var ViewTransaction = Backbone.View.extend({
-        className: "transaction col-xs-12 col-sm-6 col-md-4",
+        className: "transaction",
         initialize: function initilization(options) {
             this.options = options;
             this.template = templates.get('transaction', 'Transaction');
             this.model.on({
-                "destroy": this.onDestroy,
-                "change:amount": this.onAmountChange,
-                "change:type": this.onChangeTransactionType
+                "change:name": this.onNameChange
             }, this);
         },
         render: function render() {
             var self = this;
-            this.$el.html(this.template(this.model.toJSON()));
-            this.currentTypeClass = this.model.get("type") === this.model.TYPE.DEBT ? "out" : "in";
-            setTimeout(function () {
-                var friendModel = self.options.friendCollection.findWhere({
-                    id: self.model.get("userid")
-                });
-                if (friendModel) {
-                    self.$el.find(".dummyFriendName").html(friendModel.get("name"));
-                }
-            }, 0);
-            return this;
+            self.$el.html(self.template(self.model.toJSON()));
+            $("#" + this.options.parentDiv).html(this.$el);
+            return self;
         },
         events: {
-            "tap .dummyDelete": "onRemoveTransaction"
+            "tap .dummyNewFriend": "onNewFriend"
         },
-        onRemoveTransaction: function onRemoveTransaction() {
-            this.model.destroy();
+        onNewFriend: function () {
             return false;
         },
-        onAmountChange: function (model, amount) {
-            /*jslint unparam:true*/
-            this.$el.find(".dummyUserAmount").html("<i class=fa fa-inr''></i>" + amount);
-        },
-        onChangeTransactionType: function (model, type) {
-            this.$el.find(".transaction-container").removeClass(this.currentTypeClass);
-            this.currentTypeClass = type === model.TYPE.DEBT ? "out" : "in";
-            this.$el.find(".transaction-container").addClass(this.currentTypeClass);
-        },
-        onDestroy: function onDestroy(model) {
-            /*jslint unparam:true*/
-            this.model.off(null, null, this);
-            this.remove();
+        onNameChange: function () {
+            return true;
         }
-
     });
     return ViewTransaction;
 });
