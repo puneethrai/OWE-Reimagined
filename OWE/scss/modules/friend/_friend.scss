@@ -5,7 +5,8 @@
     }
 }
 #Left {
-    .FriendsTransactions {        
+    .FriendsTransactions {
+        height: inherit;   
         nav {
             padding-top: 4px;
         }

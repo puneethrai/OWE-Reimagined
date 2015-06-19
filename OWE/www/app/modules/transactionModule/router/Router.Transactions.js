@@ -1,6 +1,6 @@
 /*global define*/
 /*jslint browser:true*/
-define(['jquery', 'backbone', '../collection/Collection.Transactions', '../view/Views.Transactions','../view/Views.Transaction'], function ($, Backbone, TransactionCollection, ViewTransactions, TransactionView) {
+define(['jquery', 'backbone', '../collection/Collection.Transactions', '../view/Views.Transactions', '../view/Views.Transaction', 'viewHandler'], function ($, Backbone, TransactionCollection, ViewTransactions, TransactionView, viewHandler) {
     var TransactionRouter = Backbone.Router.extend({
         initialize: function initialize(argument) {
             /*jslint unparam:true*/
@@ -59,9 +59,9 @@ define(['jquery', 'backbone', '../collection/Collection.Transactions', '../view/
                 friendModel = FC.findWhere({id: id}) || FC.findWhere({special: id}) || FC.add({});
             this.TV = new TransactionView({
                 model: friendModel,
-                collection: FC,
-                parentDiv: 'Right'
-            }).render();
+                collection: FC
+            });
+            viewHandler.render('#Right', this.TV);
         }
     });
     return TransactionRouter;

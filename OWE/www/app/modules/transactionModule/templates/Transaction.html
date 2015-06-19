@@ -1,3 +1,19 @@
-<nav class="navbar navbar-inverse navbar-fixed-bottom col-xs-12 col-sm-6 text-center" role="navigation">
-	<i class="fa fa-user-plus fa-3x dummyNewFriend"></i>
-</nav>
+<div class="dummyTransaction col-xs-12">
+	<p class="dummyMainName mainName"><%=model.name%></p>
+	<form class="form">
+		<div class="form-group">
+			<label class="sr-only" for="InputAmount">Amount (in dollars)</label>
+			<div class="input-group col-xs-12">
+				<div class="input-group-addon"><i class="fa fa-sign-out fa-1x dummyDebt"></i></div>
+				<input type="text" class="form-control dummyAmount" id="InputAmount" placeholder="Amount">
+				<div class="input-group-addon"><i class="fa fa-sign-in fa-1x dummyCredit"></i></div>
+			</div>
+		</div>
+	</form>
+	<div class="dummyFriendList"></div>
+</div>
+<%if(isNew){%>
+	<nav class="navbar navbar-inverse col-xs-12 text-center nopadding dummyNav" role="navigation">
+		<i class="fa fa-user-plus fa-2x dummyNewFriend"></i>
+	</nav>
+<%}%>

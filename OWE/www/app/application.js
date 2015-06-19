@@ -7,10 +7,13 @@ define(function (require) {
         settings = require("./settings"), //global settings file of the product suite
         modules = require("./modules/modules"), //file where all of your product modules will be listed
         $ = require('jquery'),
+        _ = require('underscore'),
+        viewHandler = require('viewHandler'),
         Backbone = require("backbone");
     //Load the files which won't be explicitly called by other file
     require("localforage");
     require("localforagebackbone");
+    require("backbonehandler");
     //return an object with the public interface for an 'application' object. Read about module pattern for details.
     return {
         initialize: function () {
@@ -47,6 +50,7 @@ define(function (require) {
                     $(scrollwindow || "body").stop();
                 }
             };
+            _.bindAll(this, 'startLoadingModules');
             document.addEventListener('deviceready', this.startLoadingModules, false);
         },
         startLoadingModules: function () {
@@ -59,6 +63,8 @@ define(function (require) {
              * to create a 'Context' tree (product modules as a tree).
              */
             var index = 0;
+            $(window).on("resize", this.updateView);
+            $(window).on("orientationchange", this.updateView);
             for (index = (modules.length - 1); index >= 0; index--) {
                 modules[index].initialize(window.app.context);
             }
@@ -67,6 +73,16 @@ define(function (require) {
                     Backbone.history.start();
                 }
             });
+            this.updateView();
+        },
+        updateView: function () {
+            var height = $(window).height(),
+                width = $(window).width();
+            $('#Left, #Right').css({
+                'min-height': height,
+                'max-height': height
+            });
+            viewHandler.onWindowResize(height, width);
         }
     };
 });

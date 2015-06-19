@@ -1,5 +1,5 @@
 /*global define,templates*/
-define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jqueryTap'], function (Backbone, templates, FriendTransactions, $) {
+define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jqueryTap'], function (Backbone, templates, FriendTransactions) {
     var FriendsTransactions = Backbone.View.extend({
         className: "FriendsTransactions",
         initialize: function initilization(options) {
@@ -20,7 +20,6 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
             self.options.transactions.each(function (model) {
                 self.onNewTransaction(model);
             });
-            $("#" + this.options.parentDiv).html(this.$el);
             return self;
         },
         _getFriendTransactions: function (model) {
@@ -60,7 +59,6 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
             if (view.collection.length) {
                 this._renderView(view);
             }
-
         },
         onNewTransactionView: function () {
             Backbone.history.navigate('transaction');

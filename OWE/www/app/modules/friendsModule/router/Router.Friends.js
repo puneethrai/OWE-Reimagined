@@ -1,6 +1,6 @@
 /*global TR, define*/
 /*jslint browser:true*/
-define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views.Friends', '../view/Views.Friends.Transactions'], function ($, Backbone, FriendCollection, ViewFriends, FriendsTransaction) {
+define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views.Friends', '../view/Views.Friends.Transactions', 'viewHandler'], function ($, Backbone, FriendCollection, ViewFriends, FriendsTransaction, viewHandler) {
     var FriendRouter = Backbone.Router.extend({
         initialize: function initialize() {
             var self = this;
@@ -61,7 +61,8 @@ define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views
                 parentDiv: 'Left',
                 collection: this.FriendCollection,
                 transactions: TR.TransactionCollection
-            }).render();
+            });
+            viewHandler.render('#Left', this.FT);
         }
     });
     return FriendRouter;

@@ -25,11 +25,12 @@ require.config({
         localforage : './libs/localforage/localforage',
         localforagebackbone : './libs/localforage/localforage.backbone',
         bootstrap: './libs/boostrap/bootstrap.min',
-        bootstrapSelect: './libs/boostrap/bootstrap-select',
         jqueryTap: './libs/jquery/jquery.tap',
         //Helpers
         templates: './app/core/templates-handler',
         dataLayer: './app/core/data-abstraction',
+        backbonehandler: './app/core/backbone-additional-method',
+        viewHandler: './app/core/views-handler',
         shim: {
             jquery: {
                 exports: ['jQuery', '$']

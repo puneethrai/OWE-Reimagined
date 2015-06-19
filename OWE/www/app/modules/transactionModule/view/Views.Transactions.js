@@ -1,6 +1,6 @@
 /*globals define, app*/
 /*jslint browser:true*/
-define(['jquery', 'underscore', 'backbone', 'templates', './Views.Transaction', 'bootstrap', 'bootstrapSelect', 'jqueryTap'], function ($, _, Backbone, templates, ViewTransaction) {
+define(['jquery', 'underscore', 'backbone', 'templates', './Views.Transaction', 'bootstrap', 'jqueryTap'], function ($, _, Backbone, templates, ViewTransaction) {
     var ViewTransactions = Backbone.View.extend({
         id: "Transaction",
         className: "container",

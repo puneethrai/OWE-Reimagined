@@ -1,8 +1,8 @@
 /*globals define*/
-define(['text!./templates/Transaction.html', 'text!./templates/Transactions.html'], function () {
+define(['text!./templates/Transaction.html', 'text!./templates/Transactions.html', 'text!./templates/Transaction.Friend.html'], function () {
     return {
         templates: arguments,
-        names: ['Transaction', 'Transactions'],
+        names: ['Transaction', 'Transactions', 'Transaction.Friend'],
         modulePath: 'js/transactions',
         templatePath: 'templates',
         moduleName: 'transaction'

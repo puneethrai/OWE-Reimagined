@@ -147,12 +147,40 @@
         }
     }
 }
+
 .transaction {
+    margin-top: 10px;
     nav {
-        padding-top: 4px;
+        padding-top: 4px !important;
+        position: absolute;
+        bottom: 0;
+        border-radius: 0;
         .fa-user-plus {
             padding: 5px;
             width: 1.5em;
+        }
+    }
+    .mainName {
+        background-color: $brand-warning;
+        min-height: 50px;
+        padding: 15px 5px;
+        font-size: large;
+    }
+    .FriendTransaction {
+        background-color: #FFF;
+        padding: 1% 2%;
+        min-height: 25px;
+        &:first-child {
+            margin-top: 10px;
+        }
+        &.select {
+            background-color: $brand-info;
+            .fa-check {
+                display: inline-block !important;
+            }
+        }
+        p {
+            margin: 0;
         }
     }
 }
