@@ -23,6 +23,9 @@ define(['backbone'], function (Backbone) {
             if (!attrs.name && !attrs.migrated) {
                 return -1;
             }
+        },
+        isSpecial: function () {
+            return Boolean(this.get('special'));
         }
     });
     return FriendModel;

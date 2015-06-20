@@ -1,6 +1,6 @@
 /*global define,templates*/
 define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, templates) {
-    var ViewTransaction = Backbone.View.extend({
+    var FriendTransaction = Backbone.View.extend({
         className: "FriendTransaction animated slideInRight",
         initialize: function initilization(options) {
             this.options = options;
@@ -31,5 +31,5 @@ define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, tem
             this.$el.find('.dummyName').val(value);
         }
     });
-    return ViewTransaction;
+    return FriendTransaction;
 });

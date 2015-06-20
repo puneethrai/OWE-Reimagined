@@ -48,6 +48,15 @@ define(function (require) {
                 },
                 scrollStop: function (scrollwindow) {
                     $(scrollwindow || "body").stop();
+                },
+                getAnimationListner: function (functionName) {
+                    return {
+                        webkitAnimationEnd: functionName,
+                        mozAnimationEnd: functionName,
+                        MSAnimationEnd: functionName,
+                        oanimationend: functionName,
+                        animationend: functionName
+                    };
                 }
             };
             _.bindAll(this, 'startLoadingModules');

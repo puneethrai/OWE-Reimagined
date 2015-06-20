@@ -150,6 +150,9 @@
 
 .transaction {
     margin-top: 10px;
+    min-height: inherit;
+    max-height: inherit;
+    overflow-y: auto;
     nav {
         padding-top: 4px !important;
         position: absolute;
@@ -166,12 +169,21 @@
         padding: 15px 5px;
         font-size: large;
     }
+    #InputAmount {
+        height: 42px; //6+6+14+14
+    }
     .FriendTransaction {
         background-color: #FFF;
         padding: 1% 2%;
-        min-height: 25px;
+        min-height: 35px;
         &:first-child {
             margin-top: 10px;
+        }
+        &.debt {
+            background-color: $debt-color;
+        }
+        &.credit {
+            background-color: $credit-color;
         }
         &.select {
             background-color: $brand-info;
@@ -179,8 +191,17 @@
                 display: inline-block !important;
             }
         }
+        &.deleted {
+            p {
+                text-decoration: line-through;
+            }
+        }
         p {
             margin: 0;
+            span {
+                vertical-align: sub;
+                font-size: 20px;
+            }
         }
     }
 }

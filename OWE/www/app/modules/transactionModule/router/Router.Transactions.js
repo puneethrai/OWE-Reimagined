@@ -1,6 +1,6 @@
 /*global define*/
 /*jslint browser:true*/
-define(['jquery', 'backbone', '../collection/Collection.Transactions', '../view/Views.Transactions', '../view/Views.Transaction', 'viewHandler'], function ($, Backbone, TransactionCollection, ViewTransactions, TransactionView, viewHandler) {
+define(['jquery', 'underscore', 'backbone', '../collection/Collection.Transactions', '../view/Views.Transactions', '../view/Views.Transaction', 'viewHandler'], function ($, _, Backbone, TransactionCollection, ViewTransactions, TransactionView, viewHandler) {
     var TransactionRouter = Backbone.Router.extend({
         initialize: function initialize(argument) {
             /*jslint unparam:true*/
@@ -32,6 +32,7 @@ define(['jquery', 'backbone', '../collection/Collection.Transactions', '../view/
                     self.TransactionCollection.fetch();
                 }
             });
+            _.bindAll(this, 'onCompleted');
         },
         routes: {
             'transaction(/:id)': "onTransaction"
@@ -59,9 +60,15 @@ define(['jquery', 'backbone', '../collection/Collection.Transactions', '../view/
                 friendModel = FC.findWhere({id: id}) || FC.findWhere({special: id}) || FC.add({});
             this.TV = new TransactionView({
                 model: friendModel,
-                collection: FC
+                collection: FC,
+                transactions: this.TransactionCollection,
+                onCompleted: this.onCompleted
             });
             viewHandler.render('#Right', this.TV);
+        },
+        onCompleted: function () {
+            this.onTransaction();
+            window.app.friends.router.onRenderMainScreen();
         }
     });
     return TransactionRouter;
