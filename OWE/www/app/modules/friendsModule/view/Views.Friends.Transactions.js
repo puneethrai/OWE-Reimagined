@@ -12,7 +12,8 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
             this.friendTransactions = {};
         },
         events: {
-            'tap .dummyNewTransaction': 'onNewTransactionView'
+            'tap .dummyNewTransaction': 'onNewTransactionView',
+            'tap .dummyShowSetting': 'onRenderSetting'
         },
         render: function () {
             var self = this;
@@ -21,6 +22,23 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
                 self.onNewTransaction(model);
             });
             return self;
+        },
+        postRendering: function () {
+            var self = this;
+            self.onResizeView(this._height);
+            if (!Object.keys(self.friendTransactions).length) {
+                self._addTooltip();
+            }
+        },
+        _addTooltip: function () {
+            this.$el.find('.dummyNewTransaction').tooltip({title: 'Add new transaction here'}).tooltip('show');
+            this._tooltipped = true;
+        },
+        _removeTooltip: function () {
+            if (this._tooltipped) {
+                this.$el.find('.dummyNewTransaction').tooltip('destroy');
+                this._tooltipped = false;
+            }
         },
         _getFriendTransactions: function (model) {
             var self = this;
@@ -41,6 +59,7 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
             if (!view.options.rendered) {
                 this.$el.find('.dummyFriendsTransactions').append(view.el);
                 view.options.rendered = true;
+                this._removeTooltip();
             }
         },
         _getFrientModelFromTransaction: function (transaction) {
@@ -61,6 +80,7 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
             }
         },
         onNewTransactionView: function () {
+            this._removeTooltip();
             Backbone.history.navigate('transaction');
             window.app.transactions.router.onTransaction();
         }

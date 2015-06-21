@@ -24,13 +24,12 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
             this.transactionAdded = false;
             self.$el.html(self.template({
                 model: self.model.toJSON(),
-                isNew: self.model.isNew()
+                isNew: self.model.isNew(),
+                tempValue: self.$el.find('.dummyAmount').val()
             }));
             if (self.model.isNew() && !self.model.isSpecial()) {
                 self.collection.each(function (model) {
-                    if (this.model !== model && !model.isSpecial()) {
-                        self.onNewFriendAdded(model);
-                    }
+                    self.onNewFriendAdded(model);
                 });
             } else {
                 self.options.transactions.each(function (model) {
@@ -39,17 +38,50 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
             }
             return self;
         },
+        postRendering: function () {
+            var self = this;
+            self.animationCount = Object.keys(self.TransactionFriendViews).length;
+            self.onResizeView(this._height);
+            if (!self.animationCount && this.model.isNew()) {
+                self._addTooltip();
+            } else {
+                self._removeTooltip();
+            }
+        },
+        _addTooltip: function () {
+            this.$el.find('.dummyNewFriend').tooltip({title: 'Lets add new friend'}).tooltip('show');
+            this.$el.find('.dummyBack').tooltip({title: 'To go back'}).tooltip('show');
+            this._tooltipped = true;
+        },
+        _hideTooltip: function () {
+            if (this._tooltipped) {
+                this.$el.find('.dummyNewFriend').tooltip('hide');
+                this.$el.find('.dummyBack').tooltip('hide');
+            }
+        },
+        _removeTooltip: function () {
+            if (this._tooltipped) {
+                this.$el.find('.dummyNewFriend').tooltip('destroy');
+                this._tooltipped = false;
+            }
+        },
         events: function () {
             return _.extend(window.app.getAnimationListner('onAnimationEnded'), {
                 "tap .dummyNewFriend": "onNewFriend",
                 "tap .dummyDebt, .dummyCredit": "onAddAmount",
-                "tap .dummyBack": "onGoBack"
+                "tap .dummyBack": "onGoBack",
+                "submit .dummyForm": "onFormSubmit",
+                "tap .dummyShowSetting": "onRenderSetting"
             });
+        },
+        onFormSubmit: function () {
+            return false;
         },
         onGoBack: function () {
             this.options.onCompleted();
         },
         onNewFriend: function () {
+            this._removeTooltip();
             this.NewFriendView = new NewFriendView({
                 collection: this.collection,
                 onDone: this._closeNewFriendModal
@@ -107,7 +139,7 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
             }
         },
         onNewFriendAdded: function (model) {
-            if (!this.TransactionFriendViews[model.cid]) {
+            if (!this.TransactionFriendViews[model.cid] && this.model !== model && !model.isSpecial()) {
                 this.TransactionFriendViews[model.cid] = new TransactionFriendView({
                     model: model,
                     onSelect: this.onFriendSelected
@@ -136,20 +168,32 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
             this.selectedView = view;
         },
         onResizeView: function (height) {
-            this.$el.find('.dummyTransaction').css({
-                'max-height': height - Number(this.$el.find('.dummyNav').height()) - 20
+            this.$el.find('.dummyFriendList').css({
+                'max-height': height - Number(this.$el.find('.dummyNav').height()) - Number(this.$el.find('.dummyUserAction').height()) - 20
             });
+            Backbone.View.prototype.onResizeView.apply(this, arguments);
+            if (this._tooltipped) {
+                this._hideTooltip();
+                this._addTooltip();
+            }
         },
         onAnimationEnded: function (event) {
             if ($(event.target).hasClass('dummyFriendList')) {
                 $(event.target).removeClass('pulse');
             } else if ($(event.target).hasClass('FriendTransaction') && this.transactionAdded) {
                 this.options.onCompleted();
+            } else if ($(event.target).hasClass('FriendTransaction')) {
+                --this.animationCount;
+                if (!(this.animationCount)) {
+                    this.onResizeView(this._height);
+                }
+
             }
         },
         beforeClose: function (remove) {
             var cid;
             if (remove) {
+                this._removeTooltip();
                 this.options.transactions.off(null, null, this);
                 for (cid in this.TransactionFriendViews) {
                     if (this.TransactionFriendViews.hasOwnProperty(cid)) {

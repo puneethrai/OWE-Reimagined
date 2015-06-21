@@ -10,7 +10,12 @@ define(function (require) {
     var Boiler = require('Boiler'),
         localStorage = require('./localStorage/model/Model.Localstorage'),
         _ = require('underscore'),
-        DataLayer = require('dataLayer');
+        DataLayer = require('dataLayer'),
+        templates = require('templates'),
+        settings = require('./settings'),
+        viewHandler = require('viewHandler'),
+        settingModel = require('./setting/model/Model.Setting'),
+        SettingView = require('./setting/view/Views.Setting');
 
     // Definition of the base Module as an object, this is the return value of this AMD script
     return {
@@ -18,11 +23,15 @@ define(function (require) {
             //create module context by assiciating with the parent context
             var self = this,
                 context = new Boiler.Context(parentContext);
+            _.bindAll(this, 'startMigration', 'onRenderSettingView');
+            context.addSettings(settings);
+            templates.load(settings);
             window.app.baseModule = {
-                context: context
+                context: context,
+                renderSettingView: this.onRenderSettingView
             };
-            _.bindAll(this, 'startMigration');
             localStorage.on('change:migrated', this.onMigrationComplete, this);
+            settingModel.fetch();
             setTimeout(function () {
                 localStorage.fetch({
                     success: self.startMigration,
@@ -71,6 +80,12 @@ define(function (require) {
                 window.app.baseModule.context.notify(window.app.Events.Migration.Migrated);
                 model.off(null, null, this);
             }
+        },
+        onRenderSettingView: function () {
+            this.SettingView = new SettingView({
+                model: settingModel
+            });
+            viewHandler.render(viewHandler.DIV.RIGHT, this.SettingView);
         }
     };
 

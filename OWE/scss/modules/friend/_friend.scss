@@ -9,6 +9,23 @@
         height: inherit;   
         nav {
             padding-top: 4px;
+            .fa-cog {
+                width: 44px;
+                height: 44px;
+                margin-left: 10%;
+                position: relative;
+                top: 5px;
+                &::before {
+                    position: relative;
+                    left: -2px;
+                    top: -5px;
+                }
+            }
+            div {
+                &:last-child {
+                    margin-left: 10%;
+                }
+            }
         }
         .FriendTransactions {
             margin-bottom: 10px;

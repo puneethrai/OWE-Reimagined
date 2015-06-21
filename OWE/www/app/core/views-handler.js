@@ -24,6 +24,7 @@ define(['jquery'], function ($) {
                 $(this.DIV.LEFT).addClass('hidden-xs');
                 $(this.DIV.RIGHT).removeClass('hidden-xs');
             }
+            view.postRendering();
         },
         onWindowResize: function (height, width) {
             var div;

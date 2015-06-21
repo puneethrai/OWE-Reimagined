@@ -72,7 +72,7 @@ define(['jquery', 'underscore', 'backbone', '../collection/Collection.Transactio
                 transactions: this.TransactionCollection,
                 onCompleted: this.onCompleted
             });
-            viewHandler.render('#Right', this.TV);
+            viewHandler.render(viewHandler.DIV.RIGHT, this.TV);
         },
         onCompleted: function () {
             this.onTransaction();

@@ -52,12 +52,16 @@ nav {
         width: 1em;
         color: #ffffff;
     }
-    .fa-arrow-left {
+    .fa-arrow-left,
+    .fa-cog {
         width: 40px;
         height: 40px;
         padding: 5px;
         &:first-child {
             margin-right: 10%;
+        }
+        &:last-child {
+            margin: 0 0 0 10%;
         }
         &:only-child {
             margin: 0;
@@ -72,4 +76,18 @@ nav {
 .nopadding {
     padding: 0 !important;
     margin: 0 !important;
+}
+#Setting {    
+    margin-top: 10px;
+    min-height: inherit;
+    max-height: inherit;
+    nav {
+        padding-top: 4px !important;
+        position: absolute;
+        bottom: 0;
+        border-radius: 0;
+    }
+    ul {
+        list-style: none;
+    }
 }

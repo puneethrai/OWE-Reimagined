@@ -26,6 +26,9 @@ require.config({
         localforagebackbone : './libs/localforage/localforage.backbone',
         bootstrap: './libs/boostrap/bootstrap.min',
         jqueryTap: './libs/jquery/jquery.tap',
+        jquerymove:  './libs/jquery/jquery.event.move',
+        jqueryswipe: './libs/jquery/jquery.event.swipe',
+        uiswitch: './libs/boostrap/bootstrap-switch.min',
         //Helpers
         templates: './app/core/templates-handler',
         dataLayer: './app/core/data-abstraction',

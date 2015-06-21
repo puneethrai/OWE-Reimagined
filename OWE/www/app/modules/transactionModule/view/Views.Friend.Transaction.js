@@ -1,5 +1,5 @@
 /*global define,templates*/
-define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap'], function (_, Backbone, templates) {
+define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymove', 'jqueryswipe'], function (_, Backbone, templates) {
     var FriendTransaction = Backbone.View.extend({
         className: "FriendTransaction animated slideInRight",
         initialize: function initilization(options) {
@@ -25,7 +25,8 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap'], function 
         events: function () {
             return _.extend(window.app.getAnimationListner('onAnimationEnded'), {
                 "tap .dummyDelete": "onDelete",
-                "tap .dummyDestroy": "onDestroyTransaction"
+                "tap .dummyDestroy": "onDestroyTransaction",
+                "swiperight" : "onDelete"
             });
         },
         onDelete: function () {

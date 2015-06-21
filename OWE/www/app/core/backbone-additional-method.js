@@ -15,8 +15,14 @@ define(['backbone'], function (Backbone) {
             this.closed = true;
         }
     };
-    Backbone.View.prototype.onResizeView = function (height, weight) {
-        /*jslint unparam:true*/
+    Backbone.View.prototype.onResizeView = function (height, width) {
+        this._height = height;
+        this._width = width;
+    };
+    Backbone.View.prototype.postRendering = function () {
         return true;
+    };
+    Backbone.View.prototype.onRenderSetting = function () {
+        window.app.baseModule.renderSettingView();
     };
 });

@@ -152,7 +152,6 @@
     margin-top: 10px;
     min-height: inherit;
     max-height: inherit;
-    overflow-y: auto;
     nav {
         padding-top: 4px !important;
         position: absolute;
@@ -170,45 +169,51 @@
         font-size: large;
     }
     #InputAmount {
-        height: 42px; //6+6+14+14
+        height: 42px;
+        //6+6+14+14
+   
     }
-    .FriendTransaction {
-        background-color: #FFF;
-        padding: 1% 2%;
-        min-height: 35px;
-        position: relative;
-        margin-top: 20px;
-        &.debt {
-            background-color: $debt-color;
-        }
-        &.credit {
-            background-color: $credit-color;
-        }
-        &.select {
-            background-color: $brand-info;
-            .fa-check {
-                display: inline-block !important;
+    .FriendList {
+        overflow-x: hidden; 
+        overflow-y: auto;
+        .FriendTransaction {
+            background-color: #FFF;
+            padding: 1% 2%;
+            min-height: 35px;
+            position: relative;
+            margin-top: 20px;
+            &.debt {
+                background-color: $debt-color;
             }
-        }
-        &.deleted {
+            &.credit {
+                background-color: $credit-color;
+            }
+            &.select {
+                background-color: $brand-info;
+                .fa-check {
+                    display: inline-block !important;
+                }
+            }
+            &.deleted {
+                p {
+                    text-decoration: line-through;
+                }
+            }
             p {
-                text-decoration: line-through;
+                margin: 0;
+                span {
+                    vertical-align: sub;
+                    font-size: 20px;
+                }
             }
-        }
-        p {
-            margin: 0;
-            span {
-                vertical-align: sub;
-                font-size: 20px;
+            .date {
+                position: absolute;
+                top: -15px;
+                background-color: inherit;
+                right: 0;
+                padding: 0 1%;
+                @include border-top-radius(5px);
             }
-        }
-        .date {
-            position: absolute;
-            top: -15px;
-            background-color: inherit;
-            right: 0;
-            padding: 0 1%;
-            @include border-top-radius(5px);
         }
     }
 }

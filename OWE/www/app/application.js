@@ -78,6 +78,7 @@ define(function (require) {
                 modules[index].initialize(window.app.context);
             }
             window.app.context.listen(window.app.Events.Migration.Migrated, function () {
+                Backbone.history.navigate('', {replace: true});
                 if (!Backbone.History.started) {
                     Backbone.history.start();
                 }

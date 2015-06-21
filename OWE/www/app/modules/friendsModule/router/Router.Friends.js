@@ -26,9 +26,11 @@ define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views
                 if (!self.FriendCollection.models.length) {
                     self.FriendCollection.fetch({
                         success: function () {
-                            self.FriendCollection.add({special: 'noname', name: 'No Name'});
-                            Backbone.history.navigate('temp', {trigger:true});
-                            Backbone.history.navigate('', {trigger:true});
+                            if (!self.FriendCollection.findWhere({special: 'noname'})) {
+                                self.FriendCollection.create({special: 'noname', name: 'No Name'});
+                            }
+                            window.app.transactions.router.onTransaction();
+                            self.onRenderMainScreen();
                         }
                     });
                 }
@@ -58,11 +60,10 @@ define(['jquery', 'backbone', '../collection/Collection.Friends', '../view/Views
         onRenderMainScreen: function () {
             var TR = window.app.transactions && window.app.transactions.router;
             this.FT = new FriendsTransaction({
-                parentDiv: 'Left',
                 collection: this.FriendCollection,
                 transactions: TR.TransactionCollection
             });
-            viewHandler.render('#Left', this.FT);
+            viewHandler.render(viewHandler.DIV.LEFT, this.FT);
         }
     });
     return FriendRouter;
