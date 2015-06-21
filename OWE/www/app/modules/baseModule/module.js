@@ -52,6 +52,17 @@ define(function (require) {
                             }, 'Migration completed');
                         });
                     });
+                }).fail(function () {
+                    navigator.notification.confirm("Looks like migration failed . Did you had any transaction? . Press cancel to continue without migration", function (index) {
+                        if (index === 2) {
+                            model.save({
+                                migrated: true
+                            });
+                        } else {
+                            window.app.baseModule.context.notify(window.app.Events.Migration.Clear);
+                            self.startMigration(model);
+                        }
+                    }, 'Migration failed');
                 });
             }
         },

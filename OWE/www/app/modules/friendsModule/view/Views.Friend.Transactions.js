@@ -7,7 +7,8 @@ define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, tem
             this.template = templates.get('friend', 'FriendTransactions');
             this.collection.on({
                 add: this.onNewTransaction,
-                remove: this.onRemoveTransaction
+                remove: this.onRemoveTransaction,
+                "change:delete": this.onRemoveTransaction
             }, this);
             this.total = 0;
         },

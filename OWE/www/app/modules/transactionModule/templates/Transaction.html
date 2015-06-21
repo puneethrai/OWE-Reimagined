@@ -1,5 +1,5 @@
 <div class="dummyTransaction col-xs-12">
-	<p class="dummyMainName mainName"><%=model.name%></p>
+	<p class="dummyMainName mainName <%if(isNew){%>hide<%}%>"><%=model.name%></p>
 	<form class="form">
 		<div class="form-group dummyInputGroup">
 			<label class="sr-only" for="InputAmount">Amount (in dollars)</label>
@@ -12,8 +12,9 @@
 	</form>
 	<div class="dummyFriendList"></div>
 </div>
-<%if(isNew){%>
-	<nav class="navbar navbar-inverse col-xs-12 text-center nopadding dummyNav" role="navigation">
+<nav class="navbar navbar-inverse col-xs-12 text-center nopadding dummyNav" role="navigation">
+	<i class="fa fa fa-arrow-left fa-2x dummyBack"></i>
+	<%if(isNew){%>
 		<i class="fa fa-user-plus fa-2x dummyNewFriend"></i>
-	</nav>
-<%}%>
+	<%}%>
+</nav>

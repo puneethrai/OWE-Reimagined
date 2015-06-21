@@ -54,7 +54,7 @@ define(['jquery'], function ($) {
                 defer = $.Deferred();
             if (!self._db) {
                 //Open the database with the properties listed in the ENUM
-                self._db = window.openDatabase(this.PROPERTIES.dbName, this.PROPERTIES.dbVersion, this.PROPERTIES.dbDescription, this.PROPERTIES.dbSize);
+                self._db = window.openDatabase && window.openDatabase(this.PROPERTIES.dbName, this.PROPERTIES.dbVersion, this.PROPERTIES.dbDescription, this.PROPERTIES.dbSize);
                 if (self._db) {
                     //self._executeSql(self.QUERIES.dropTransactionTable, null, function(){
                     self._executeSql(self.QUERIES.createTableQueryTransaction, null, function () {

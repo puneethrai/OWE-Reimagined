@@ -11,9 +11,12 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap'], function 
             }, this);
         },
         render: function render() {
-            var self = this;
+            var self = this,
+                date = new Date(0);
+            date.setMilliseconds(Number(self.model.get('date')));
             self.$el.html(self.template({
-                model: self.model.toJSON()
+                model: self.model.toJSON(),
+                date: date.toDateString()
             }));
             self.onDeleted(self.model, self.model.get('deleted'));
             self.$el.addClass(self.model.get('type') === self.model.TYPE.DEBT ? 'debt' : 'credit');

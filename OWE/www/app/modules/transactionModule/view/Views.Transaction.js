@@ -1,13 +1,12 @@
 /*global define,templates*/
 define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './Views.Friend.Transaction', './Modal.Friend.Add', 'viewHandler', 'jquery', 'jqueryTap'], function (_, Backbone, templates, TransactionFriendView, FriendTransactionView, NewFriendView, viewHandler, $) {
     var ViewTransaction = Backbone.View.extend({
-        className: "transaction hidden-xs",
+        className: "transaction",
         initialize: function initilization(options) {
             this.options = options;
             this.template = templates.get('transaction', 'Transaction');
             this.model.on({
-                "change:name": this.onNameChange,
-                "sync": this.onFriendSaved
+                "change:name": this.onNameChange
             }, this);
             this.collection.on({
                 add: this.onNewFriendAdded
@@ -22,6 +21,7 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
         },
         render: function render() {
             var self = this;
+            this.transactionAdded = false;
             self.$el.html(self.template({
                 model: self.model.toJSON(),
                 isNew: self.model.isNew()
@@ -42,20 +42,29 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
         events: function () {
             return _.extend(window.app.getAnimationListner('onAnimationEnded'), {
                 "tap .dummyNewFriend": "onNewFriend",
-                "tap .dummyDebt, .dummyCredit": "onAddAmount"
+                "tap .dummyDebt, .dummyCredit": "onAddAmount",
+                "tap .dummyBack": "onGoBack"
             });
+        },
+        onGoBack: function () {
+            this.options.onCompleted();
         },
         onNewFriend: function () {
             this.NewFriendView = new NewFriendView({
-                model: this.model,
+                collection: this.collection,
                 onDone: this._closeNewFriendModal
             });
             viewHandler.render('#Modal', this.NewFriendView);
         },
-        _closeNewFriendModal: function () {
+        _closeNewFriendModal: function (model) {
             if (this.NewFriendView) {
                 this.NewFriendView.close();
                 this.NewFriendView = null;
+                if (model) {
+                    this.model.off(null, null, this);
+                    this.model = model;
+                    this.onFriendSaved();
+                }
             }
         },
         onNameChange: function (model, value) {
@@ -70,6 +79,7 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
                     delete this.TransactionFriendViews[cid];
                 }
             }
+            this.render();
         },
         onAddAmount: function (event) {
             var model = this.model.isNew() ? this.selectedView ? this.selectedView.model : null : this.model,
@@ -87,10 +97,13 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
                     type: type,
                     userid: userid,
                     date: new Date().getTime()
-                }, {validate: true})) {
+                }, {
+                    validate: true
+                })) {
                 this.$el.find('.dummyInputGroup').addClass('has-error');
             } else {
                 this.$el.find('.dummyAmount').val('');
+                this.transactionAdded = true;
             }
         },
         onNewFriendAdded: function (model) {
@@ -130,6 +143,8 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
         onAnimationEnded: function (event) {
             if ($(event.target).hasClass('dummyFriendList')) {
                 $(event.target).removeClass('pulse');
+            } else if ($(event.target).hasClass('FriendTransaction') && this.transactionAdded) {
+                this.options.onCompleted();
             }
         },
         beforeClose: function (remove) {

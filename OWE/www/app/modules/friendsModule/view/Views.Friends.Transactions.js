@@ -1,7 +1,7 @@
 /*global define,templates*/
 define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jqueryTap'], function (Backbone, templates, FriendTransactions) {
     var FriendsTransactions = Backbone.View.extend({
-        className: "FriendsTransactions",
+        className: "FriendsTransactions col-xs-12",
         initialize: function initilization(options) {
             this.options = options;
             this.template = templates.get('friend', 'FriendsTransactions');

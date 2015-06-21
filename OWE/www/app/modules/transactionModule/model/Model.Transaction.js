@@ -23,7 +23,7 @@ define(['backbone'], function (Backbone) {
         },
         validate: function (attrs, options) {
             /*jslint unparam:true*/
-            if (typeof attrs.amount !== "number" || isNaN(attrs.amount) || attrs.amount === 0) {
+            if (typeof attrs.amount !== "number" || isNaN(attrs.amount) || attrs.amount <= 0) {
                 return -1;
             }
             if (attrs.type !== this.TYPE.DEBT && attrs.type !== this.TYPE.CREDIT) {

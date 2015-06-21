@@ -11,31 +11,35 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap'], function 
         initialize: function initilization(options) {
             this.options = options;
             this.template = templates.get('transaction', 'Modal.Friend.Add');
-            this.model.on({
-                "change:name": this.onNameChange
-            }, this);
             _.bindAll(this, 'onClose');
         },
         render: function () {
             var self = this;
-            self.$el.html(self.template({
-                model: self.model.toJSON()
-            }));
+            self.$el.html(self.template());
             self.$el.modal('show');
             return self;
         },
-        events: {
-            "tap .dummyAdd": "onNewFriend",
-            "hidden.bs.modal": "onRemove"
-        },
-        onNewFriend: function () {
-            this.model.set('name', this.$el.find('.dummyNewName').val(), {validate: true});
-            this.model.save({
-                success: this.onClose
+        events: function () {
+            return _.extend(window.app.getAnimationListner('onAnimationEnded'), {
+                "tap .dummyAdd": "onNewFriend",
+                "hidden.bs.modal": "onRemove"
             });
         },
-        onClose: function () {
-            this.options.onDone();
+        onNewFriend: function () {
+            if (!this.collection.create({
+                    name: this.$el.find('.dummyNewName').val()
+                }, {
+                    validate: true,
+                    success: this.onClose,
+                    error: function () {
+                        console.error(arguments);
+                    }
+                })) {
+                this.$el.find('.dummyNewName').addClass('animated shake');
+            }
+        },
+        onClose: function (model) {
+            this.options.onDone(model);
         },
         onNameChange: function (model, value) {
             /*jslint unparam:true*/
@@ -44,6 +48,9 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap'], function 
         onRemove: function () {
             this.options.onDone();
             this.close(true);
+        },
+        onAnimationEnded: function () {
+            this.$el.find('.dummyNewName').removeClass('animated shake');
         },
         beforeClose: function () {
             this.$el.modal('hide');

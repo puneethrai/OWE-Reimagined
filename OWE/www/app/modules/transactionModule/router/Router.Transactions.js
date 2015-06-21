@@ -57,7 +57,15 @@ define(['jquery', 'underscore', 'backbone', '../collection/Collection.Transactio
         },
         onTransaction: function (id) {
             var FC = window.app.friends.router.FriendCollection,
-                friendModel = FC.findWhere({id: id}) || FC.findWhere({special: id}) || FC.add({});
+                friendModel = null;
+            FC.every(function (model) {
+                if ((model.id && model.id === id) || (model.get('special') && model.get('special') === id)) {
+                    friendModel = model;
+                    return false;
+                }
+                return true;
+            });
+            friendModel = friendModel || new FC.model();
             this.TV = new TransactionView({
                 model: friendModel,
                 collection: FC,

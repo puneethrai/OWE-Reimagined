@@ -176,9 +176,8 @@
         background-color: #FFF;
         padding: 1% 2%;
         min-height: 35px;
-        &:first-child {
-            margin-top: 10px;
-        }
+        position: relative;
+        margin-top: 20px;
         &.debt {
             background-color: $debt-color;
         }
@@ -202,6 +201,14 @@
                 vertical-align: sub;
                 font-size: 20px;
             }
+        }
+        .date {
+            position: absolute;
+            top: -15px;
+            background-color: inherit;
+            right: 0;
+            padding: 0 1%;
+            @include border-top-radius(5px);
         }
     }
 }
