@@ -1,8 +1,21 @@
 <ul class="animated bounceIn nopadding">
-	<li>
+	<li class=" col-xs-12">
 		<label class="col-xs-7">Turn on Notification</label>
 		<div class="switch-wrapper pull-right">
 			<input type="checkbox" class="dummyNotification" <%if(model.notification){%>checked<%}%>>
+		</div>
+	</li>
+	<li class=" col-xs-12">
+		<div class="list-group">
+			<div class="list-group-item">
+				<h4 class="list-group-item-heading">Change Background color</h4>
+				<%if(isBrowser) {%>
+					<p class="list-group-item-text dummyPhotoLib lead underline upload"><strong>Upload from disk</strong></p>
+				<%} else {%>
+					<p class="list-group-item-text dummyPhotoLib lead underline upload"><strong>Upload from photo library</strong></p>
+					<p class="list-group-item-text dummyPhotoAlbum lead underline upload"><strong>Upload from saved photo album</strong></p>
+				<%}%>
+			</div>
 		</div>
 	</li>
 </ul>

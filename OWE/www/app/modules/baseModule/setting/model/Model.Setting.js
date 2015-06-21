@@ -1,5 +1,5 @@
 /*globals define*/
-define(['backbone'], function (Backbone) {
+define(['backbone', 'jquery'], function (Backbone, $) {
     var SettingModel = Backbone.Model.extend({
         sync: Backbone.localforage.sync('Setting'),
         defaults: function defaults() {
@@ -7,6 +7,15 @@ define(['backbone'], function (Backbone) {
                 notification: true,
                 backgroundImage: ""
             };
+        },
+        initialize: function () {
+            this.on('change:backgroundImage', this.onBackgroundImage);
+        },
+        onBackgroundImage: function (model, value) {
+            /*jslint unparam:true*/
+            if (value) {
+                $('body').css('background-image', 'url(' + value + ')');
+            }
         }
     });
     return new SettingModel({

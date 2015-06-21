@@ -175,6 +175,8 @@ module.exports = function (grunt) {
                         'cordova-plugin-splashscreen',
                         'cordova-plugin-whitelist',
                         'cordova-plugin-statusbar',
+                        'cordova-plugin-camera',
+                        'com.msopentech.websql',
                         'com.risingj.cordova.livetiles',
                         'de.appplant.cordova.plugin.local-notification'
                     ]
@@ -192,6 +194,8 @@ module.exports = function (grunt) {
                         'cordova-plugin-splashscreen',
                         'cordova-plugin-whitelist',
                         'cordova-plugin-statusbar',
+                        'cordova-plugin-camera',
+                        'com.msopentech.websql',
                         'com.risingj.cordova.livetiles',
                         'de.appplant.cordova.plugin.local-notification'
                     ]

@@ -17,6 +17,8 @@ body {
     /* prevent copy paste, to allow, change 'none' to 'text' */
     overflow: hidden;
     background-color: rgb(255, 255, 255);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 nav {
@@ -89,5 +91,15 @@ nav {
     }
     ul {
         list-style: none;
+        .upload {
+          margin-top: 15px;
+        }
     }
+}
+.underline {
+    border-bottom: 2px solid #c3c3c3
+}
+[type=file] {
+    position: absolute;
+    top: -100px
 }
