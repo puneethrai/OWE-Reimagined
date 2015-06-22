@@ -62,7 +62,7 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
             this.model.set('backgroundImage', "data:image/jpeg;base64," + imageData);
             this.model.save();
         },
-        onPhotoError: function (e) {
+        onPhotoError: function () {
             navigator.notification.alert('Some thing went wrong will getting photo. Make sure you enable our app to access library', null, 'Failed');
         }
     });

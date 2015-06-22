@@ -28,7 +28,8 @@ define(function (require) {
             templates.load(settings);
             window.app.baseModule = {
                 context: context,
-                renderSettingView: this.onRenderSettingView
+                renderSettingView: this.onRenderSettingView,
+                settingModel: settingModel
             };
             localStorage.on('change:migrated', this.onMigrationComplete, this);
             settingModel.fetch();

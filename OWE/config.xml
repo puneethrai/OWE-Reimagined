@@ -33,4 +33,9 @@
     </platform>
     <preference name="DisallowOverscroll" value="true"/>
     <preference name="Fullscreen" value="true" />
+    <platform name="wp8">
+        <icon src="res/wp/ApplicationIcon.png" width="99" height="99" />
+        <!-- tile image -->
+        <icon src="res/wp/Background.png" width="159" height="159" />
+     </platform>
 </widget>

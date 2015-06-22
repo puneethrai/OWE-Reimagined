@@ -30,18 +30,11 @@ define(['backbone', '../model/Model.Transaction'], function (Backbone, Transacti
         notifyTitle: function () {
             LiveTiles.updateAppTile(null, null, {
                 title: 'Transactions',
-                image: 'Images/appbar.next.rest.png',
+                image: 'Images/' + (this.total < 0 ? 'appbar.owe.them.png' : 'appbar.owe.they.png'),
                 count: this.length,
                 backTitle: 'Transactions',
                 backContent: (this.total < 0 ? 'You' : 'They') + ' owe ' + (this.total < 0 ? 'them ' : 'you ') + Math.abs(this.total) + ' units',
-                backImage: 'Images/appbar.close.rest.png'
-            });
-            // create a secondary tile
-            LiveTiles.createSecondaryTile(null, null, {
-                title: 'Transactions',
-                image: 'Images/appbar.save.rest.png',
-                count: this.length,
-                backTitle: 'Transactions'
+                backImage: 'Images/' + (this.total < 0 ? 'appbar.owe.them.png' : 'appbar.owe.they.png')
             });
         }
     });

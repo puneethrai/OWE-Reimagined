@@ -50,13 +50,11 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
         },
         _addTooltip: function () {
             this.$el.find('.dummyNewFriend').tooltip({title: 'Lets add new friend'}).tooltip('show');
-            this.$el.find('.dummyBack').tooltip({title: 'To go back'}).tooltip('show');
             this._tooltipped = true;
         },
         _hideTooltip: function () {
             if (this._tooltipped) {
                 this.$el.find('.dummyNewFriend').tooltip('hide');
-                this.$el.find('.dummyBack').tooltip('hide');
             }
         },
         _removeTooltip: function () {

@@ -8,3 +8,4 @@ tools/documentation/docs
 .DS_Store
 .git/*
 .sonar/
+*.db
