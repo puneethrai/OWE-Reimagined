@@ -9,6 +9,7 @@ define(['backbone', '../model/Model.Transaction'], function (Backbone, Transacti
                 add: this.onNewTransaction,
                 "change:delete": this.onRemoveTransaction
             });
+            this.notifyTitle();
         },
         onNewTransaction: function (model) {
             this._calculate(model, false);
@@ -30,7 +31,7 @@ define(['backbone', '../model/Model.Transaction'], function (Backbone, Transacti
         notifyTitle: function () {
             LiveTiles.updateAppTile(null, null, {
                 title: 'Transactions',
-                image: 'Images/' + (this.total < 0 ? 'appbar.owe.them.png' : 'appbar.owe.they.png'),
+                image: 'www/image/' + (this.total < 0 ? 'appbar.owe.them.png' : 'appbar.owe.they.png'),
                 count: this.length,
                 backTitle: 'Transactions',
                 backContent: (this.total < 0 ? 'You' : 'They') + ' owe ' + (this.total < 0 ? 'them ' : 'you ') + Math.abs(this.total) + ' units',

@@ -37,5 +37,7 @@
         <icon src="res/wp/ApplicationIcon.png" width="99" height="99" />
         <!-- tile image -->
         <icon src="res/wp/Background.png" width="159" height="159" />
+        <!-- images are determined by width and height. The following are supported -->
+        <splash src="res/wp/SplashScreenImage.jpg" width="768" height="1280"/>
      </platform>
 </widget>

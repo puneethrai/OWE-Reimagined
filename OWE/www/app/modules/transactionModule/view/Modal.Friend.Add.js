@@ -22,8 +22,12 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap'], function 
         events: function () {
             return _.extend(window.app.getAnimationListner('onAnimationEnded'), {
                 "tap .dummyAdd": "onNewFriend",
-                "hidden.bs.modal": "onRemove"
+                "hidden.bs.modal": "onRemove",
+                "shown.bs.modal": "onRendered"
             });
+        },
+        onRendered: function () {
+            this.$el.find('.dummyNewName').focus();
         },
         onNewFriend: function () {
             if (!this.collection.create({

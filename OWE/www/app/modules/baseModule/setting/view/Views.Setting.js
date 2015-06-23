@@ -13,10 +13,11 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
             var self = this;
             self.$el.html(self.template({
                 model: self.model.toJSON(),
-                isBrowser: cordova.platformId === 'browser'
+                isBrowser: cordova.platformId === 'browser',
+                supportsSavedLib: cordova.platformId !== 'windowsphone'
             }));
             self.$el.find(".dummyNotification").bootstrapSwitch({
-                size: 'mini',
+                size: 'small',
                 onSwitchChange: this.onNotificationChanged,
                 state: this.model.get('notification')
             });

@@ -16,7 +16,8 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
             date.setMilliseconds(Number(self.model.get('date')));
             self.$el.html(self.template({
                 model: self.model.toJSON(),
-                date: date.toDateString()
+                date: date.toDateString(),
+                TYPE: self.model.TYPE
             }));
             self.onDeleted(self.model, self.model.get('deleted'));
             self.$el.addClass(self.model.get('type') === self.model.TYPE.DEBT ? 'debt' : 'credit');
