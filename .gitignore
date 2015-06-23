@@ -6,3 +6,4 @@ OWE/hooks
 OWE/plugins
 OWE/www/main-build.js
 OWE/www/css/
+*.db
