@@ -7,8 +7,7 @@ define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, tem
             this.template = templates.get('friend', 'FriendTransactions');
             this.collection.on({
                 add: this.onNewTransaction,
-                remove: this.onRemoveTransaction,
-                "change:delete": this.onRemoveTransaction
+                "change:deleted": this.onRemoveTransaction
             }, this);
             this.total = 0;
         },
@@ -17,9 +16,7 @@ define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, tem
         },
         render: function () {
             var self = this;
-            this.collection.each(function (model) {
-                self._calculate(model);
-            });
+            self._calculate(self.collection);
             self.renderView();
             return self;
         },
@@ -31,22 +28,29 @@ define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, tem
                 name: this.model.get('name')
             }));
         },
-        _calculate: function (model, removed) {
-            if (model.get('type') === model.TYPE.DEBT) {
-                this.total = removed ? this.total + model.get('amount') : this.total - model.get('amount');
-            } else {
-                this.total = removed ? this.total - model.get('amount') : this.total + model.get('amount');
-            }
+        _calculate: function (collection) {
+            var total = 0;
+            collection.each(function (model) {
+                if (!model.get('deleted')) {
+                    if (model.get('type') === model.TYPE.DEBT) {
+                        total -= model.get('amount');
+                    } else {
+                        total += model.get('amount');
+                    }
+                }
+            });
+            this.total = total;
             this.type = this.total < 0 ? 'debt' : 'credit';
+            return this.total;
         },
-        onNewTransaction: function (model) {
-            this._calculate(model);
+        onNewTransaction: function () {
+            this._calculate(this.collection);
             this.renderView();
         },
-        onRemoveTransaction: function (model) {
-            this._calculate(model, true);
+        onRemoveTransaction: function () {
+            this._calculate(this.collection);
             this.renderView();
-            if (!this.collection.length) {
+            if (!this.collection.findWhere({deleted: true})) {
                 this.options.onEmpty();
             }
         },

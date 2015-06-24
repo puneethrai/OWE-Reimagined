@@ -14,6 +14,7 @@ define(function (require) {
     require("localforage");
     require("localforagebackbone");
     require("backbonehandler");
+    require("bootstrap");
     //return an object with the public interface for an 'application' object. Read about module pattern for details.
     return {
         initialize: function () {

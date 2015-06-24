@@ -1,6 +1,6 @@
 /*global define*/
 /*jslint browser:true*/
-define(['jquery', 'underscore', 'backbone', '../collection/Collection.Transactions', '../view/Views.Transactions', '../view/Views.Transaction', 'viewHandler'], function ($, _, Backbone, TransactionCollection, ViewTransactions, TransactionView, viewHandler) {
+define(['underscore', 'backbone', '../collection/Collection.Transactions', '../view/Views.Transaction', 'viewHandler'], function (_, Backbone, TransactionCollection, TransactionView, viewHandler) {
     var TransactionRouter = Backbone.Router.extend({
         initialize: function initialize(argument) {
             /*jslint unparam:true*/
@@ -36,24 +36,6 @@ define(['jquery', 'underscore', 'backbone', '../collection/Collection.Transactio
         },
         routes: {
             'transaction(/:id)': "onTransaction"
-        },
-        _onTransaction: function (argument) {
-            /*jslint unparam:true*/
-            var FR = window.app.friends && window.app.friends.router;
-            if (FR && FR.FV) {
-                FR.FV.$el.addClass("hide");
-            }
-            $("nav a[href=#transaction]").addClass("active");
-            $("nav a[href=#friends]").removeClass("active");
-            if (!this.TV) {
-                this.TV = new ViewTransactions({
-                    parentDiv: "Dynamic",
-                    collection: this.TransactionCollection,
-                    friendCollection: FR.FriendCollection
-                }).render();
-            } else {
-                this.TV.$el.removeClass("hide");
-            }
         },
         onTransaction: function (id) {
             var FC = window.app.friends.router.FriendCollection,
