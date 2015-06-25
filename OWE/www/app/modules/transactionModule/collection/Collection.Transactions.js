@@ -16,8 +16,8 @@ define(['backbone', '../model/Model.Transaction'], function (Backbone, Transacti
             this._calculate(model, false);
             this.notifyTitle();
         },
-        onRemoveTransaction: function (model) {
-            this._calculate(model, true);
+        onRemoveTransaction: function (model, value) {
+            this._calculate(model, Boolean(value));
             this.notifyTitle();
         },
         onRemoved: function () {
