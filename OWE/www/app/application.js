@@ -1,4 +1,4 @@
-/*globals define*/
+/*globals define,cordova*/
 /*jslint browser:true, sloppy:true*/
 define(function (require) {
     /*jslint unparam:true*/
@@ -28,7 +28,8 @@ define(function (require) {
                         FriendsData: "Events.Migration.FriendsData",
                         Migrated: "Events.Migration.Migrated",
                         Clear: "Events.Migration.Clear",
-                    }
+                    },
+                    RateApp: "Events.RateApp"
                 },
                 ID: {
                     LocalstorageModel: "Localstorage",
@@ -36,6 +37,17 @@ define(function (require) {
                     TransactionCollection: "Transactions",
                     FriendModel: "Friend",
                     FriendCollection: "Friends"
+                },
+                rateApp: function () {
+                    var url;
+                    switch (cordova.platformId) {
+                    case 'windowsphone':
+                        url = encodeURI('zune://navigate?appid=' + this.context.getSettings().appID.wp);
+                        break;
+                    }
+                    if (url) {
+                        window.open(url, '_self', null);
+                    }
                 },
                 scrollDown: function (scrollToValue, scrollwindow) {
                     if ($.fn.animate) {

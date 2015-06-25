@@ -20,6 +20,16 @@
 			</div>
 		</div>
 	</li>
+	<%if(!isBrowser) {%>
+		<li class=" col-xs-12">
+			<div class="list-group">
+				<div class="list-group-item">
+					<h4 class="list-group-item-heading lead dummyRateApp"><strong>Rate the app</strong></h4>
+				</div>
+			</div>
+		</li>
+	<%}%>
+	<p class="text-center">Version <%=app.context.getSettings().appVersion%></p>
 </ul>
 <nav class="navbar navbar-inverse col-xs-12 text-center nopadding dummyNav" role="navigation">
 	<i class="fa fa-arrow-left fa-2x dummyBack"></i>

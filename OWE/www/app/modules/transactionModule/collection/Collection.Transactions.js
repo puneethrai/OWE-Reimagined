@@ -7,7 +7,8 @@ define(['backbone', '../model/Model.Transaction'], function (Backbone, Transacti
         initialize: function () {
             this.on({
                 add: this.onNewTransaction,
-                "change:delete": this.onRemoveTransaction
+                "change:deleted": this.onRemoveTransaction,
+                remove: this.onRemoved
             });
             this.notifyTitle();
         },
@@ -18,7 +19,11 @@ define(['backbone', '../model/Model.Transaction'], function (Backbone, Transacti
         onRemoveTransaction: function (model) {
             this._calculate(model, true);
             this.notifyTitle();
-
+        },
+        onRemoved: function () {
+            if (!this.length) {
+                window.app.transactions.context.notify(window.app.Events.RateApp);
+            }
         },
         _calculate: function (model, removed) {
             var value = model.get('amount');

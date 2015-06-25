@@ -13,8 +13,8 @@ define(['jquery'], function ($) {
             if (views[div]) {
                 views[div].close(true);
             }
-            views[div] = view;
             view.render();
+            views[div] = view;
             $(div).html(view.$el);
             view.onResizeView(_height, _width);
             if (div === this.DIV.LEFT) {
@@ -25,6 +25,7 @@ define(['jquery'], function ($) {
                 $(this.DIV.RIGHT).removeClass('hidden-xs');
             }
             view.postRendering();
+            view.animateNav();
         },
         onWindowResize: function (height, width) {
             var div;

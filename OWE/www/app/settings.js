@@ -5,7 +5,12 @@
  * sub contexts. Note that sub contexts receive own 'copies' of global settings.
  * 
  */
+/*globals define*/
 define({
-	appName: "BoilerplateJS"
+    appName: "OWE",
+    appID: {
+        wp: "2c00d347-8c16-43ad-ab73-716d6cd02b6a"
+    },
+    appVersion: "2.0.0"
 });
 

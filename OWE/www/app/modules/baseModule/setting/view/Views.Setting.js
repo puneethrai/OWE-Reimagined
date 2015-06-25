@@ -27,7 +27,8 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
             return _.extend(window.app.getAnimationListner('onAnimationEnded'), {
                 "tap .dummyBack": "onNavigateBack",
                 "tap .dummyPhotoLib": "onPhotoLib",
-                "tap .dummyPhotoAlbum": "onPhotoAlbum"
+                "tap .dummyPhotoAlbum": "onPhotoAlbum",
+                "tap .dummyRateApp": "onRateApp"
             });
         },
         onAnimationEnded: function () {
@@ -65,6 +66,9 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
         },
         onPhotoError: function () {
             navigator.notification.alert('Some thing went wrong will getting photo. Make sure you enable our app to access library', null, 'Failed');
+        },
+        onRateApp: function () {
+            this.model.rateApp();
         }
     });
     return Setting;

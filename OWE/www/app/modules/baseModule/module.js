@@ -23,13 +23,14 @@ define(function (require) {
             //create module context by assiciating with the parent context
             var self = this,
                 context = new Boiler.Context(parentContext);
-            _.bindAll(this, 'startMigration', 'onRenderSettingView');
+            _.bindAll(this, 'startMigration', 'onRenderSettingView', 'onRateApp');
             context.addSettings(settings);
             templates.load(settings);
+            context.listen(window.app.Events.RateApp, this.onRateApp);
             window.app.baseModule = {
                 context: context,
                 renderSettingView: this.onRenderSettingView,
-                settingModel: settingModel
+                settingModel: settingModel,
             };
             localStorage.on('change:migrated', this.onMigrationComplete, this);
             settingModel.fetch();
@@ -87,6 +88,29 @@ define(function (require) {
                 model: settingModel
             });
             viewHandler.render(viewHandler.DIV.RIGHT, this.SettingView);
+        },
+        onRateApp: function () {
+            if (settingModel.canAskRating()) {
+                navigator.notification.confirm("If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!".replace('%@', window.app.baseModule.context.getSettings().appName), function (index) {
+                    var modelSave = null;
+                    if (index === 1) {
+                        modelSave = {
+                            appRated: false,
+                            dontRate: true
+                        };
+                    } else if (index === 3) {
+                        modelSave = {
+                            appRated: true,
+                            dontRate: false
+                        };
+                        window.app.rateApp();
+                    }
+                    if (modelSave) {
+                        modelSave.versionrated = window.app.baseModule.context.getSettings().appVersion;
+                        settingModel.save(modelSave);
+                    }
+                }, "Rate %@".replace('%@', window.app.baseModule.context.getSettings().appName), ['No, Thanks', 'Remind Me Later', 'Rate It Now']);
+            }
         }
     };
 

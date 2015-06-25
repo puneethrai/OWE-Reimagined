@@ -1,4 +1,5 @@
 /*global define,templates*/
+/*jslint browser:true*/
 define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jqueryTap'], function (Backbone, templates, FriendTransactions) {
     var FriendsTransactions = Backbone.View.extend({
         className: "FriendsTransactions col-xs-12",

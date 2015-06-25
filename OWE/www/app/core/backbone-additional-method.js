@@ -25,4 +25,7 @@ define(['backbone'], function (Backbone) {
     Backbone.View.prototype.onRenderSetting = function () {
         window.app.baseModule.renderSettingView();
     };
+    Backbone.View.prototype.animateNav = function () {
+        this.$el.find('nav i').removeClass('animated bounceInUp').addClass('animated bounceInUp');
+    };
 });
