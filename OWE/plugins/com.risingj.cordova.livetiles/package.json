@@ -1,0 +1,12 @@
+{
+    "version": "0.1.0",
+    "name": "com.risingj.cordova.livetiles",
+    "cordova_name": "LiveTiles",
+    "description": "Cordova plugin for updating tiles on WP7 + WP8",
+    "license": "Apache 2.0",
+    "keywords": [
+        "cordova",
+        "live tiles"
+    ],
+    "engines": []
+}

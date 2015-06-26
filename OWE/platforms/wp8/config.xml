@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.friends.owe" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="LiveTiles">
+        <param name="wp-package" value="LiveTiles" />
+    </feature>
+    <feature name="Console">
+        <param name="wp-package" value="DebugConsole" />
+    </feature>
+    <feature name="Device">
+        <param name="wp-package" value="Device" />
+    </feature>
+    <feature name="Notification">
+        <param name="wp-package" value="Notification" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="wp-package" value="StatusBar" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="wp-package" value="SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="WebSql">
+        <param name="wp-package" value="WebSql" />
+    </feature>
+    <feature name="Camera">
+        <param name="wp-package" value="Camera" />
+    </feature>
+    <icon height="99" src="res/wp/ApplicationIcon.png" width="99" />
+    <icon height="159" src="res/wp/Background.png" width="159" />
+    <splash height="1280" src="res/wp/SplashScreenImage.jpg" width="768" />
+    <name>OWE</name>
+    <description>
+        How much do you friend OWE your or OWE them ?
+    </description>
+    <author email="npuneethrai@yahoo.co.in" href="http://puneethrai.github.io/OWE">
+        Puneeth Rai
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="Fullscreen" value="true" />
+</widget>

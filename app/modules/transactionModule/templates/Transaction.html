@@ -1,0 +1,23 @@
+<div class="dummyTransaction col-xs-12">
+	<div class="dummyUserAction">
+		<p class="dummyMainName mainName <%if(isNew){%>hide<%}%>"><%=model.name%></p>
+		<form class="form dummyForm">
+			<div class="form-group dummyInputGroup nopadding">
+				<label class="sr-only" for="InputAmount">Amount (in dollars)</label>
+				<div class="input-group col-xs-12">
+					<div class="input-group-addon dummyDebt cursor-pointer"><i class="fa fa-sign-out fa-1x"></i><p class="nopadding">Give</p></div>
+					<input type="number" class="form-control dummyAmount" id="InputAmount" placeholder="Amount" value="<%=tempValue%>">
+					<div class="input-group-addon dummyCredit cursor-pointer"><i class="fa fa-sign-in fa-1x "></i><p class="nopadding">Get</p></div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="dummyFriendList FriendList"></div>
+</div>
+<nav class="navbar navbar-inverse col-xs-12 text-center nopadding dummyNav" role="navigation">
+	<i class="fa fa-arrow-left fa-2x dummyBack"></i>
+	<%if(isNew){%>
+		<i class="fa fa-user-plus fa-2x dummyNewFriend"></i>
+	<%}%>
+	<i class="fa fa-cog fa-2x dummyShowSetting"></i>
+</nav>
