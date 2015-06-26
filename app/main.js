@@ -17,7 +17,7 @@ require.config({
         path : './libs/require/path',
         domReady : './libs/require/domReady',
         // namespace that aggregate core classes that are in frequent use
-        Boiler : './app/core/_boiler_',
+        Boiler : './app/core/boiler',
         //Framework
         jquery : './libs/jquery/jquery-min',
         underscore : './libs/underscore/underscore-min',
