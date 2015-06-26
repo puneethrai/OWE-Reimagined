@@ -1,6 +1,6 @@
 /*globals define*/
 define(function (require) {
-    var Helpers = require('./helpers/_helpers_'); //helpers namespace
+    var Helpers = require('./helpers/helpers'); //helpers namespace
 
 
     /**
