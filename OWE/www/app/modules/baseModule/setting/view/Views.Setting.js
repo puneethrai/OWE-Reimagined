@@ -14,7 +14,7 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
             self.$el.html(self.template({
                 model: self.model.toJSON(),
                 isBrowser: cordova.platformId === 'browser',
-                supportsSavedLib: cordova.platformId !== 'windowsphone'
+                supportsSavedLib: (cordova.platformId !== 'windowsphone' && cordova.platformId !== 'browser')
             }));
             self.$el.find(".dummyNotification").bootstrapSwitch({
                 size: 'small',
@@ -49,7 +49,12 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
             }
         },
         onPhotoLib: function () {
-            this._getImage(Camera.PictureSourceType.PHOTOLIBRARY);
+            if ((cordova.platformId === 'browser' && !$('[type=file]').length) || cordova.platformId !== 'browser') {
+                this._getImage(Camera.PictureSourceType.PHOTOLIBRARY);
+                if (cordova.platformId === 'browser') {
+                    this.onResizeView();
+                }
+            }
         },
         onPhotoAlbum: function () {
             this._getImage(Camera.PictureSourceType.SAVEDPHOTOALBUM);
@@ -65,10 +70,20 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
             this.model.save();
         },
         onPhotoError: function () {
-            navigator.notification.alert('Some thing went wrong will getting photo. Make sure you enable our app to access library', null, 'Failed');
+            navigator.notification.alert('Some thing went wrong while getting photo. Make sure you enable our app to access library', null, 'Failed');
         },
         onRateApp: function () {
             this.model.rateApp();
+        },
+        onResizeView: function () {
+            var fileInput = $('[type=file]')[0],
+                photoRect = this.$el.find('.dummyPhotoLib')[0].getClientRects().item(0);
+            if (fileInput) {
+                $(fileInput).css({
+                    top: photoRect.top,
+                    right: 0
+                });
+            }
         }
     });
     return Setting;

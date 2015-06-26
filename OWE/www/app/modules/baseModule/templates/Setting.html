@@ -9,13 +9,9 @@
 		<div class="list-group">
 			<div class="list-group-item">
 				<h4 class="list-group-item-heading lead"><strong>Change Background color</strong></h4>
-				<%if(isBrowser) {%>
-					<p class="list-group-item-text dummyPhotoLib lead underline upload"><strong>Upload from disk</strong></p>
-				<%} else {%>
-					<p class="list-group-item-text dummyPhotoLib lead underline upload"><strong>Upload from photo library</strong></p>
-					<%if(supportsSavedLib) {%>
-						<p class="list-group-item-text dummyPhotoAlbum lead underline upload"><strong>Upload from saved photo album</strong></p>
-					<%}%>
+				<p class="list-group-item-text dummyPhotoLib lead underline upload cursor-pointer"><strong><%if(isBrowser) {%>Upload from disk<%} else {%>Upload from photo library<%}%></strong></p>
+				<%if(supportsSavedLib) {%>
+					<p class="list-group-item-text dummyPhotoAlbum lead underline upload"><strong>Upload from saved photo album</strong></p>
 				<%}%>
 			</div>
 		</div>
