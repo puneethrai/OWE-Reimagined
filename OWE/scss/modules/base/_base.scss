@@ -53,6 +53,14 @@ nav {
         border: 1px solid white;
         width: 1em;
         color: #ffffff;
+        &:hover {
+            border: 1px solid #c3c3c3;
+            background: white;
+            color: black;
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
     }
     .fa-arrow-left,
     .fa-cog {
