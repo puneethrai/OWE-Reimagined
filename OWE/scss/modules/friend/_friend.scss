@@ -8,17 +8,8 @@
     .FriendsTransactions {
         height: inherit;   
         nav {
-            padding-top: 4px;
             .fa-cog {
-                width: 44px;
-                height: 44px;
-                margin-left: 10%;
-                padding: 0.25% 0.75%; 
-            }
-            div {
-                &:last-child {
-                    margin-left: 10%;
-                }
+                padding: 5px 8px;
             }
         }
         .FriendTransactions {
@@ -30,7 +21,12 @@
                 margin-top: 10px;
             }
             > div {
+                @include app-transition(margin);
                 padding: 1% 2%;
+                &:hover,
+                &:active {
+                    margin: 1% 2%;
+                }
             }
             .debt {
                 background-color: $debt-color;

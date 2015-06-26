@@ -114,7 +114,10 @@ module.exports = function (grunt) {
                     'OWE/www/css/index.css': 'OWE/scss/index.scss', // 'destination': 'source'
                 }
             },
-            dev: {
+            dev: { // Target
+                options: { // Target options
+                    sourcemap: "none"
+                },
                 files: { // Dictionary of files
                     'OWE/www/css/index.css': 'OWE/scss/index.scss', // 'destination': 'source'
                 }
