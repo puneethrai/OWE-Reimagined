@@ -3,7 +3,6 @@
 define(["Boiler", "./settings", "./modules/modules", "jquery", "underscore", "viewHandler", "backbone", "localforage", "localforagebackbone", "backbonehandler", "bootstrap"], function (Boiler, settings, modules, $, _, viewHandler, Backbone) {
     /*jslint unparam:true*/
     //return an object with the public interface for an 'application' object. Read about module pattern for details.
-    console.log(arguments);
     return {
         initialize: function () {
             var globalContext = new Boiler.Context();

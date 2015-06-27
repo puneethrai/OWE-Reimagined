@@ -18,6 +18,6 @@ define(function (require) {
     **/
     return {
         Context : require("./app/core/context"),
-        Helpers : require("./app/core/helpers/helpers")
+        Helpers : require("./app/core/helpers/_helpers_")
     };
 });
