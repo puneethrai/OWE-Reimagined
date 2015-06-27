@@ -1,21 +1,9 @@
 /*globals define,cordova*/
 /*jslint browser:true, sloppy:true*/
-define(function (require) {
+define(["Boiler", "./settings", "./modules/modules", "jquery", "underscore", "viewHandler", "backbone", "localforage", "localforagebackbone", "backbonehandler", "bootstrap"], function (Boiler, settings, modules, $, _, viewHandler, Backbone) {
     /*jslint unparam:true*/
-    //dependencies
-    var Boiler = require("Boiler"), // BoilerplateJS namespace used to access core classes, see above for the definition
-        settings = require("./settings"), //global settings file of the product suite
-        modules = require("./modules/modules"), //file where all of your product modules will be listed
-        $ = require('jquery'),
-        _ = require('underscore'),
-        viewHandler = require('viewHandler'),
-        Backbone = require("backbone");
-    //Load the files which won't be explicitly called by other file
-    require("localforage");
-    require("localforagebackbone");
-    require("backbonehandler");
-    require("bootstrap");
     //return an object with the public interface for an 'application' object. Read about module pattern for details.
+    console.log(arguments);
     return {
         initialize: function () {
             var globalContext = new Boiler.Context();

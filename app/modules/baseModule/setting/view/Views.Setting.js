@@ -7,6 +7,7 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
             this.template = templates.get('baseModule', 'Setting');
             _.bindAll(this, 'onNotificationChanged', 'onPhoto', 'onPhotoError');
             this.model.on({
+                "change:backgroundImage": this.onBackgroundImage
             }, this);
         },
         render: function render() {
@@ -28,7 +29,8 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
                 "tap .dummyBack": "onNavigateBack",
                 "tap .dummyPhotoLib": "onPhotoLib",
                 "tap .dummyPhotoAlbum": "onPhotoAlbum",
-                "tap .dummyRateApp": "onRateApp"
+                "tap .dummyRateApp": "onRateApp",
+                "tap .dummyRemoveImage": "onRemoveImage"
             });
         },
         onAnimationEnded: function () {
@@ -42,10 +44,22 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
         },
         onNavigateBack: function () {
             var hash = location.hash;
+            $('[type=file]').addClass('hide');
             Backbone.history.navigate('temp');
             Backbone.history.navigate(hash, {trigger: true});
             if (!this.closed) {
                 Backbone.history.navigate('', {trigger: true});
+            }
+        },
+        onRemoveImage: function () {
+            this.model.save({backgroundImage: ""});
+        },
+        onBackgroundImage: function (model, value) {
+            /*jslint unparam:true*/
+            if (value) {
+                this.$el.find('.dummyRemoveImage').removeClass('hide');
+            } else {
+                this.$el.find('.dummyRemoveImage').addClass('hide');
             }
         },
         onPhotoLib: function () {
@@ -54,6 +68,8 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
                 if (cordova.platformId === 'browser') {
                     this.onResizeView();
                 }
+            } else if (cordova.platformId === 'browser' && $('[type=file]').length) {
+                $('[type=file]').removeClass('hide');
             }
         },
         onPhotoAlbum: function () {
@@ -84,6 +100,9 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
                     right: 0
                 });
             }
+        },
+        beforeClose: function () {
+            $('[type=file]').addClass('hide');
         }
     });
     return Setting;

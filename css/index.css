@@ -15,6 +15,18 @@ body {
   background-size: cover;
   background-repeat: no-repeat; }
 
+::-webkit-scrollbar {
+  width: 12px; }
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px; }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  background-color: #838383; }
+
 nav ul {
   padding-top: 5px; }
 nav li > a.active {
@@ -41,6 +53,7 @@ nav li:first-child .glyphicon {
 nav.navbar {
   padding-top: 4px !important; }
 nav .fa {
+  cursor: pointer;
   border-radius: 50% 50%;
   border: 1px solid white;
   color: #ffffff;
@@ -83,10 +96,17 @@ nav .fa {
 .cursor-pointer {
   cursor: pointer; }
 
+html, body {
+  font-size: 14px;
+  line-height: 22px; }
+
 @media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 13 / 10), only screen and (min-resolution: 120dpi) {
+  .tooltip-inner {
+    font-size: 1em; }
+
   html, body {
-    font-size: 16px;
-    line-height: 24px; } }
+    font-size: 17px;
+    line-height: 25px; } }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.4), only screen and (-o-min-device-pixel-ratio: 14 / 10), only screen and (min-resolution: 130dpi) {
   html, body {
     font-size: 18px;
@@ -124,6 +144,9 @@ p {
 span {
   font-size: 1em; }
 
+.tooltip-inner {
+  font-size: 0.875em; }
+
 html, body {
   font: normal 18px/30px georgia,serif;
   text-rendering: optimizeLegibility;
@@ -151,7 +174,8 @@ html, body {
     height: 45px; }
   .transaction .FriendList {
     overflow-x: hidden;
-    overflow-y: auto; }
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; }
     .transaction .FriendList .FriendTransaction {
       background-color: #FFF;
       padding: 1% 2%;
@@ -188,6 +212,9 @@ html, body {
   -webkit-overflow-scrolling: touch; }
 
 #Left .FriendsTransactions {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   height: inherit; }
   #Left .FriendsTransactions nav .fa-cog {
     padding: 5px 8px; }

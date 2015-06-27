@@ -1,5 +1,5 @@
 /*globals define*/
-define(['backbone'], function (Backbone) {
+define(['backbone', "localforage", "localforagebackbone"], function (Backbone) {
     var Localstorage = Backbone.Model.extend({
         sync: Backbone.localforage.sync('Localstorage')
     });

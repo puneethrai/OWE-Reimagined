@@ -1,5 +1,5 @@
 /*globals define, LiveTiles*/
-define(['backbone', '../model/Model.Transaction'], function (Backbone, TransactionModel) {
+define(['backbone', '../model/Model.Transaction', "localforage", "localforagebackbone"], function (Backbone, TransactionModel) {
     var TransactionCollection = Backbone.Collection.extend({
         total: 0,
         sync: Backbone.localforage.sync('Transactions'),
@@ -23,6 +23,7 @@ define(['backbone', '../model/Model.Transaction'], function (Backbone, Transacti
         onRemoved: function () {
             if (!this.length) {
                 window.app.transactions.context.notify(window.app.Events.RateApp);
+                this.notifyTitle();
             }
         },
         _calculate: function (model, removed) {
