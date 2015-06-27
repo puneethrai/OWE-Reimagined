@@ -1,6 +1,6 @@
 /*globals define*/
 /*jslint browser:true*/
-define(['backbone', 'jquery'], function (Backbone, $) {
+define(['backbone', 'jquery', "localforage", "localforagebackbone"], function (Backbone, $) {
     var SettingModel = Backbone.Model.extend({
         sync: Backbone.localforage.sync('Setting'),
         defaults: function defaults() {
@@ -19,6 +19,8 @@ define(['backbone', 'jquery'], function (Backbone, $) {
             /*jslint unparam:true*/
             if (value) {
                 $('body').css('background-image', 'url(' + value + ')');
+            } else {
+                $('body').css('background-image', 'none');
             }
         },
         canAskRating: function () {

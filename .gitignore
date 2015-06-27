@@ -7,3 +7,5 @@ OWE/plugins
 OWE/www/main-build.js
 OWE/www/css/
 *.db
+*.db
+OWE/www/Thumbs.db

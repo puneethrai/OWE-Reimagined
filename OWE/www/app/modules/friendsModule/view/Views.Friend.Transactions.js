@@ -6,8 +6,9 @@ define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, tem
             this.options = options;
             this.template = templates.get('friend', 'FriendTransactions');
             this.collection.on({
-                add: this.onNewTransaction,
-                "change:deleted": this.onRemoveTransaction
+                add: this.onTransactionChange,
+                "change:deleted": this.onTransactionChange,
+                remove: this.onRemoveTransaction
             }, this);
             this.total = 0;
         },
@@ -43,14 +44,12 @@ define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, tem
             this.type = this.total < 0 ? 'debt' : 'credit';
             return this.total;
         },
-        onNewTransaction: function () {
+        onTransactionChange: function () {
             this._calculate(this.collection);
             this.renderView();
         },
         onRemoveTransaction: function () {
-            this._calculate(this.collection);
-            this.renderView();
-            if (!this.collection.findWhere({deleted: true})) {
+            if (!this.collection.length) {
                 this.options.onEmpty();
             }
         },

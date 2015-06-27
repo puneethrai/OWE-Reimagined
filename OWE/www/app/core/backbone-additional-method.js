@@ -16,8 +16,8 @@ define(['backbone'], function (Backbone) {
         }
     };
     Backbone.View.prototype.onResizeView = function (height, width) {
-        this._height = height;
-        this._width = width;
+        this._height = height || this._height;
+        this._width = width || this._width;
     };
     Backbone.View.prototype.postRendering = function () {
         return true;

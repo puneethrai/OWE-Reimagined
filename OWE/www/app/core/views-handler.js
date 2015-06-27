@@ -16,7 +16,6 @@ define(['jquery'], function ($) {
             view.render();
             views[div] = view;
             $(div).html(view.$el);
-            view.onResizeView(_height, _width);
             if (div === this.DIV.LEFT) {
                 $(this.DIV.RIGHT).addClass('hidden-xs');
                 $(this.DIV.LEFT).removeClass('hidden-xs');
@@ -24,6 +23,7 @@ define(['jquery'], function ($) {
                 $(this.DIV.LEFT).addClass('hidden-xs');
                 $(this.DIV.RIGHT).removeClass('hidden-xs');
             }
+            view.onResizeView(_height, _width);
             view.postRendering();
             view.animateNav();
         },

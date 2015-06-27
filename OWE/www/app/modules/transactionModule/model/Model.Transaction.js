@@ -1,5 +1,5 @@
 /*globals define*/
-define(['backbone'], function (Backbone) {
+define(['backbone', "localforage", "localforagebackbone"], function (Backbone) {
     var TransactionModel = Backbone.Model.extend({
         initialize: function initialize(argument) {
             /*jslint unparam:true*/

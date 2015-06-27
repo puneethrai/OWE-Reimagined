@@ -116,7 +116,7 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
                 TYPE = this.options.transactions.model.prototype.TYPE;
             if (model) {
                 this._createNewTransaction($(event.currentTarget).hasClass('dummyDebt') ? TYPE.DEBT : TYPE.CREDIT, model.id);
-            } else if (!this.options.transactions.length) {
+            } else if (!Object.keys(this.TransactionFriendViews).length) {
                 this.$el.find('.dummyAmount').blur();
                 this.onNewFriend();
             } else {

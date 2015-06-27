@@ -57,6 +57,7 @@ define(['underscore', 'backbone', '../collection/Collection.Transactions', '../v
             viewHandler.render(viewHandler.DIV.RIGHT, this.TV);
         },
         onCompleted: function () {
+            Backbone.history.navigate('', {replace: true});
             this.onTransaction();
             window.app.friends.router.onRenderMainScreen();
         }

@@ -6,6 +6,7 @@
 }
 #Left {
     .FriendsTransactions {
+        @include overflow-y-with-ios();
         height: inherit;   
         nav {
             .fa-cog {

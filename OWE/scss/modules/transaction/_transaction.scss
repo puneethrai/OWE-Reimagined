@@ -22,8 +22,7 @@
         //6+6+16+16
     }
     .FriendList {
-        overflow-x: hidden; 
-        overflow-y: auto;
+        @include overflow-y-with-ios();
         .FriendTransaction {
             background-color: #FFF;
             padding: 1% 2%;

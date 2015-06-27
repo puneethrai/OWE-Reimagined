@@ -26,7 +26,7 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
         },
         postRendering: function () {
             var self = this;
-            self.onResizeView(this._height);
+            self.onResizeView(this._height, this._width);
             if (!Object.keys(self.friendTransactions).length) {
                 self._addTooltip();
             }
@@ -84,6 +84,12 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
             this._removeTooltip();
             Backbone.history.navigate('transaction');
             window.app.transactions.router.onTransaction();
+        },
+        onResizeView: function (height) {
+            this.$el.css({
+                'max-height' : height - Number(this.$el.find('nav').height()) - 10
+            });
+            Backbone.View.prototype.onResizeView.apply(this, arguments);
         }
     });
     return FriendsTransactions;
