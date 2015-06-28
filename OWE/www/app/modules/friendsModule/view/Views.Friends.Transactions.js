@@ -86,8 +86,8 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
             window.app.transactions.router.onTransaction();
         },
         onResizeView: function (height) {
-            this.$el.css({
-                'max-height' : height - Number(this.$el.find('nav').height()) - 10
+            this.$el.find('.dummyFriendsTransactions').css({
+                'max-height' : height - Number(this.$el.find('nav').height()) - 40 - Number(this.$el.find('.dummyTitle').height())
             });
             Backbone.View.prototype.onResizeView.apply(this, arguments);
         }

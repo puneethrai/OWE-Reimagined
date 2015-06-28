@@ -121,6 +121,11 @@ nav {
         }
     }
 }
+#EULA {
+    .content {
+        @include overflow-y-with-ios();
+    }
+}
 .underline {
     border-bottom: 2px solid #c3c3c3
 }
@@ -213,4 +218,15 @@ html, body {
     color: #222;
     background-color: #fff;
     height: 100%;
+}
+
+.Title {
+    background-color: $brand-warning;
+    min-height: 50px;
+    padding: 15px 5px;
+    font-size: large;
+    width: 100%;
+}
+.overflowArea {
+    @include overflow-y-with-ios();
 }

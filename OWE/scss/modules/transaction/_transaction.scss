@@ -2,6 +2,9 @@
     margin-top: 10px;
     min-height: inherit;
     max-height: inherit;
+    .input-group-addon {
+        width: 70px;
+    }
     nav {
         position: absolute;
         bottom: 0;
@@ -10,14 +13,7 @@
             padding: 5px;
             width: 1.5em;
         }
-    }
-    .mainName {
-        background-color: $brand-warning;
-        min-height: 50px;
-        padding: 15px 5px;
-        font-size: large;
-    }
-    #InputAmount {
+    }    #InputAmount {
         height: 45px;
         //6+6+16+16
     }

@@ -50,11 +50,18 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
         },
         _addTooltip: function () {
             this.$el.find('.dummyNewFriend').tooltip({title: 'Lets add new friend'}).tooltip('show');
+            this.$el.find('.dummyDebt').tooltip({title: 'To give to a friend'}).tooltip('show');
+            this.$el.find('.dummyCredit').tooltip({
+                title: 'To get from friend',
+                placement: 'bottom'
+            }).tooltip('show');
             this._tooltipped = true;
         },
         _hideTooltip: function () {
             if (this._tooltipped) {
                 this.$el.find('.dummyNewFriend').tooltip('hide');
+                this.$el.find('.dummyDebt').tooltip('hide');
+                this.$el.find('.dummyCredit').tooltip('hide');
             }
         },
         _removeTooltip: function () {
@@ -84,7 +91,7 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
                 collection: this.collection,
                 onDone: this._closeNewFriendModal
             });
-            viewHandler.render('#Modal', this.NewFriendView);
+            viewHandler.render(viewHandler.DIV.MODAL, this.NewFriendView);
         },
         _closeNewFriendModal: function (model) {
             if (this.NewFriendView) {
