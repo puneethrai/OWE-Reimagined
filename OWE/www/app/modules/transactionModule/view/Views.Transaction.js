@@ -67,6 +67,8 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
         _removeTooltip: function () {
             if (this._tooltipped) {
                 this.$el.find('.dummyNewFriend').tooltip('destroy');
+                this.$el.find('.dummyDebt').tooltip('destroy');
+                this.$el.find('.dummyCredit').tooltip('destroy');
                 this._tooltipped = false;
             }
         },
