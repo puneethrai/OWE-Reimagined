@@ -21,7 +21,7 @@ body {
     -webkit-user-select: none;
     /* prevent copy paste, to allow, change 'none' to 'text' */
     overflow: hidden;
-    background-color: rgb(255, 255, 255);
+    background-color: #3F51B5;
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -216,7 +216,7 @@ html, body {
     font: normal 18px/30px georgia,serif;
     text-rendering: optimizeLegibility;
     color: #222;
-    background-color: #fff;
+    background-color: #3F51B5!important;
     height: 100%;
 }
 
@@ -229,4 +229,7 @@ html, body {
 }
 .overflowArea {
     @include overflow-y-with-ios();
+}
+.tooltip.bottom .tooltip-arrow {
+    top: 0!important;
 }
