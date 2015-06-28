@@ -131,6 +131,7 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
             }
         },
         _createNewTransaction: function (type, userid) {
+            var self = this;
             this.$el.find('.dummyInputGroup').removeClass('has-error');
             if (!this.options.transactions.create({
                     amount: Number(this.$el.find('.dummyAmount').val()),
@@ -138,7 +139,10 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
                     userid: userid,
                     date: new Date().getTime()
                 }, {
-                    validate: true
+                    validate: true,
+                    success: function () {
+                        self.options.onCompleted(userid);
+                    }
                 })) {
                 this.$el.find('.dummyInputGroup').addClass('has-error');
             } else {
