@@ -1,33 +1,43 @@
-<ul class="animated bounceIn nopadding">
-	<li class=" col-xs-12 hide">
-		<label class="col-xs-9 lead"><strong>Notification</strong></label>
-		<div class="switch-wrapper pull-right">
-			<input type="checkbox" class="dummyNotification" <%if(model.notification){%>checked<%}%>>
-		</div>
-	</li>
-	<li class=" col-xs-12">
-		<div class="list-group">
-			<div class="list-group-item">
-				<h4 class="list-group-item-heading lead"><strong>Change Background color</strong></h4>
-				<p class="list-group-item-text dummyPhotoLib lead underline upload cursor-pointer"><strong><%if(isBrowser) {%>Upload from disk<%} else {%>Upload from photo library<%}%></strong></p>
-				<%if(supportsSavedLib) {%>
-					<p class="list-group-item-text dummyPhotoAlbum lead underline upload"><strong>Upload from saved photo album</strong></p>
-				<%}%>
-				<p class="list-group-item-text dummyRemoveImage lead underline upload cursor-pointer <%if (!model.backgroundImage) {%>hide<%}%>"><strong>Remove Background Image</strong></p>
+<div class="col-xs-12">
+	<label class="dummyTitle Title">Settings</label>
+	<ul class="animated bounceIn nopadding">
+		<li class="hide">
+			<label class="col-xs-9 lead"><strong>Notification</strong></label>
+			<div class="switch-wrapper pull-right">
+				<input type="checkbox" class="dummyNotification" <%if(model.notification){%>checked<%}%>>
 			</div>
-		</div>
-	</li>
-	<%if(!isBrowser) {%>
-		<li class=" col-xs-12">
+		</li>
+		<li>
 			<div class="list-group">
 				<div class="list-group-item">
-					<h4 class="list-group-item-heading lead dummyRateApp"><strong>Rate the app</strong></h4>
+					<h4 class="list-group-item-heading lead"><strong>Change Background color</strong></h4>
+					<p class="list-group-item-text dummyPhotoLib lead underline upload cursor-pointer"><strong><%if(isBrowser) {%>Upload from disk<%} else {%>Upload from photo library<%}%></strong></p>
+					<%if(supportsSavedLib) {%>
+						<p class="list-group-item-text dummyPhotoAlbum lead underline upload"><strong>Upload from saved photo album</strong></p>
+					<%}%>
+					<p class="list-group-item-text dummyRemoveImage lead underline upload cursor-pointer <%if (!model.backgroundImage) {%>hide<%}%>"><strong>Remove Background Image</strong></p>
 				</div>
 			</div>
 		</li>
-	<%}%>
-	<p class="text-center">Version <%=app.context.getSettings().appVersion%></p>
-</ul>
+		<%if(!isBrowser) {%>
+			<li class="dummyRateApp cursor-pointer">
+				<div class="list-group">
+					<div class="list-group-item">
+						<h4 class="list-group-item-heading lead"><strong>Rate the app</strong></h4>
+					</div>
+				</div>
+			</li>
+		<%}%>
+		<li class="dummyEULA cursor-pointer hide">
+			<div class="list-group">
+				<div class="list-group-item">
+					<h4 class="list-group-item-heading lead"><strong>EULA</strong></h4>
+				</div>
+			</div>
+		</li>
+		<p class="text-center white">v<%=app.context.getSettings().appVersion%></p>
+	</ul>
+</div>
 <nav class="navbar navbar-inverse col-xs-12 text-center nopadding dummyNav" role="navigation">
 	<i class="fa fa-arrow-left fa-2x dummyBack"></i>
 </nav>

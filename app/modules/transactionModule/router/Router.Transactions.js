@@ -56,9 +56,9 @@ define(['underscore', 'backbone', '../collection/Collection.Transactions', '../v
             });
             viewHandler.render(viewHandler.DIV.RIGHT, this.TV);
         },
-        onCompleted: function () {
+        onCompleted: function (userid) {
             Backbone.history.navigate('', {replace: true});
-            this.onTransaction();
+            this.onTransaction(userid);
             window.app.friends.router.onRenderMainScreen();
         }
     });

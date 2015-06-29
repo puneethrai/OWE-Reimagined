@@ -50,16 +50,25 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
         },
         _addTooltip: function () {
             this.$el.find('.dummyNewFriend').tooltip({title: 'Lets add new friend'}).tooltip('show');
+            this.$el.find('.dummyDebt').tooltip({title: 'To give to a friend'}).tooltip('show');
+            this.$el.find('.dummyCredit').tooltip({
+                title: 'To get from friend',
+                placement: 'bottom'
+            }).tooltip('show');
             this._tooltipped = true;
         },
         _hideTooltip: function () {
             if (this._tooltipped) {
                 this.$el.find('.dummyNewFriend').tooltip('hide');
+                this.$el.find('.dummyDebt').tooltip('hide');
+                this.$el.find('.dummyCredit').tooltip('hide');
             }
         },
         _removeTooltip: function () {
             if (this._tooltipped) {
                 this.$el.find('.dummyNewFriend').tooltip('destroy');
+                this.$el.find('.dummyDebt').tooltip('destroy');
+                this.$el.find('.dummyCredit').tooltip('destroy');
                 this._tooltipped = false;
             }
         },
@@ -84,7 +93,7 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
                 collection: this.collection,
                 onDone: this._closeNewFriendModal
             });
-            viewHandler.render('#Modal', this.NewFriendView);
+            viewHandler.render(viewHandler.DIV.MODAL, this.NewFriendView);
         },
         _closeNewFriendModal: function (model) {
             if (this.NewFriendView) {
@@ -124,6 +133,7 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
             }
         },
         _createNewTransaction: function (type, userid) {
+            var self = this;
             this.$el.find('.dummyInputGroup').removeClass('has-error');
             if (!this.options.transactions.create({
                     amount: Number(this.$el.find('.dummyAmount').val()),
@@ -131,7 +141,10 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
                     userid: userid,
                     date: new Date().getTime()
                 }, {
-                    validate: true
+                    validate: true,
+                    success: function () {
+                        self.options.onCompleted(userid);
+                    }
                 })) {
                 this.$el.find('.dummyInputGroup').addClass('has-error');
             } else {

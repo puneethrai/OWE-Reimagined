@@ -42,11 +42,15 @@ define(['backbone', '../collection/Collection.Friends', '../view/Views.Friends.T
         },
         onRenderMainScreen: function () {
             var TR = window.app.transactions && window.app.transactions.router;
-            this.FT = new FriendsTransaction({
-                collection: this.FriendCollection,
-                transactions: TR.TransactionCollection
-            });
-            viewHandler.render(viewHandler.DIV.LEFT, this.FT);
+            if (!this.FT) {
+                this.FT = new FriendsTransaction({
+                    collection: this.FriendCollection,
+                    transactions: TR.TransactionCollection
+                });
+                viewHandler.render(viewHandler.DIV.LEFT, this.FT);
+            } else {
+                viewHandler.showLeft();
+            }
         }
     });
     return FriendRouter;

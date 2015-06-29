@@ -1,11 +1,12 @@
 /*global define,templates, cordova, Camera*/
-define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymove', 'jqueryswipe', 'uiswitch'], function (_, Backbone, templates, $) {
+/*jslint browser:true*/
+define(['underscore', 'backbone', 'templates', 'jquery', './Modal.EULA', 'viewHandler', 'jqueryTap', 'jquerymove', 'jqueryswipe', 'uiswitch'], function (_, Backbone, templates, $, EUlAView, viewHandler) {
     var Setting = Backbone.View.extend({
         id: "Setting",
         initialize: function initilization(options) {
             this.options = options;
             this.template = templates.get('baseModule', 'Setting');
-            _.bindAll(this, 'onNotificationChanged', 'onPhoto', 'onPhotoError');
+            _.bindAll(this, 'onNotificationChanged', 'onPhoto', 'onPhotoError', '_closeEula');
             this.model.on({
                 "change:backgroundImage": this.onBackgroundImage
             }, this);
@@ -30,7 +31,8 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
                 "tap .dummyPhotoLib": "onPhotoLib",
                 "tap .dummyPhotoAlbum": "onPhotoAlbum",
                 "tap .dummyRateApp": "onRateApp",
-                "tap .dummyRemoveImage": "onRemoveImage"
+                "tap .dummyRemoveImage": "onRemoveImage",
+                "tap .dummyEULA": "onEula"
             });
         },
         onAnimationEnded: function () {
@@ -66,7 +68,7 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
             if ((cordova.platformId === 'browser' && !$('[type=file]').length) || cordova.platformId !== 'browser') {
                 this._getImage(Camera.PictureSourceType.PHOTOLIBRARY);
                 if (cordova.platformId === 'browser') {
-                    this.onResizeView();
+                    this.onResizeView(this._height, this._width);
                 }
             } else if (cordova.platformId === 'browser' && $('[type=file]').length) {
                 $('[type=file]').removeClass('hide');
@@ -91,7 +93,7 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
         onRateApp: function () {
             this.model.rateApp();
         },
-        onResizeView: function () {
+        onResizeView: function (height) {
             var fileInput = $('[type=file]')[0],
                 photoRect = this.$el.find('.dummyPhotoLib')[0].getClientRects().item(0);
             if (fileInput) {
@@ -100,9 +102,27 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
                     right: 0
                 });
             }
+            this.$el.css({
+                'max-height' : height - Number(this.$el.find('nav').height()) - 10 - Number(this.$el.find('.dummyTitle').height())
+            });
+            Backbone.View.prototype.onResizeView.apply(this, arguments);
+        },
+        onEula: function () {
+            this._closeEula();
+            this.eUlAView = new EUlAView({
+                onClose: this._closeEula
+            });
+            viewHandler.render(viewHandler.DIV.MODAL, this.eUlAView);
+        },
+        _closeEula: function () {
+            if (this.eUlAView) {
+                this.eUlAView.close(true);
+                this.eUlAView = null;
+            }
         },
         beforeClose: function () {
             $('[type=file]').addClass('hide');
+            this._closeEula();
         }
     });
     return Setting;

@@ -17,15 +17,21 @@ define(['jquery'], function ($) {
             views[div] = view;
             $(div).html(view.$el);
             if (div === this.DIV.LEFT) {
-                $(this.DIV.RIGHT).addClass('hidden-xs');
-                $(this.DIV.LEFT).removeClass('hidden-xs');
+                this.showLeft();
             } else if (div === this.DIV.RIGHT) {
-                $(this.DIV.LEFT).addClass('hidden-xs');
-                $(this.DIV.RIGHT).removeClass('hidden-xs');
+                this.showRight();
             }
             view.onResizeView(_height, _width);
             view.postRendering();
             view.animateNav();
+        },
+        showLeft: function () {
+            $(this.DIV.RIGHT).addClass('hidden-xs');
+            $(this.DIV.LEFT).removeClass('hidden-xs');
+        },
+        showRight: function () {
+            $(this.DIV.LEFT).addClass('hidden-xs');
+            $(this.DIV.RIGHT).removeClass('hidden-xs');
         },
         onWindowResize: function (height, width) {
             var div;

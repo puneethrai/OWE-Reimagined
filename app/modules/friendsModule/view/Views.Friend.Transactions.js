@@ -1,5 +1,6 @@
 /*global define,templates*/
-define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, templates) {
+/*jslint browser:true*/
+define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap'], function (_, Backbone, templates) {
     var FriendTransactions = Backbone.View.extend({
         className: "FriendTransactions animated pulse",
         initialize: function initilization(options) {
@@ -12,8 +13,11 @@ define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, tem
             }, this);
             this.total = 0;
         },
-        events: {
-            'tap': 'onTransactionView'
+        events: function () {
+
+            return _.extend(window.app.getAnimationListner('onAnimationEnded'), {
+                'tap': 'onTransactionView'
+            });
         },
         render: function () {
             var self = this;
@@ -50,12 +54,18 @@ define(['backbone', 'templates', 'jquery', 'jqueryTap'], function (Backbone, tem
         },
         onRemoveTransaction: function () {
             if (!this.collection.length) {
-                this.options.onEmpty();
+                this.$el.removeClass('pulse').addClass('zoomOutDown');
+
             }
         },
         onTransactionView: function () {
             Backbone.history.navigate('transaction/' + (this.model.id || this.model.get('special')));
             window.app.transactions.router.onTransaction(this.model.id || this.model.get('special'));
+        },
+        onAnimationEnded: function () {
+            if (this.$el.hasClass('zoomOutDown')) {
+                this.options.onEmpty();
+            }
         }
     });
     return FriendTransactions;

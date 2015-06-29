@@ -11,7 +11,7 @@ body {
   -webkit-user-select: none;
   /* prevent copy paste, to allow, change 'none' to 'text' */
   overflow: hidden;
-  background-color: white;
+  background-color: #3F51B5;
   background-size: cover;
   background-repeat: no-repeat; }
 
@@ -87,6 +87,11 @@ nav .fa {
     #Setting ul .upload {
       margin-top: 15px; }
 
+#EULA .content {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; }
+
 .underline {
   border-bottom: 2px solid #c3c3c3; }
 
@@ -151,13 +156,33 @@ html, body {
   font: normal 18px/30px georgia,serif;
   text-rendering: optimizeLegibility;
   color: #222;
-  background-color: #fff;
+  background-color: #263238 !important;
   height: 100%; }
+
+.Title {
+  background-color: #f0ad4e;
+  min-height: 50px;
+  padding: 15px 5px;
+  font-size: large;
+  width: 100%; }
+
+.overflowArea {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; }
+
+.tooltip.bottom .tooltip-arrow {
+  top: 0 !important; }
+
+.white {
+  color: #FFF; }
 
 .transaction {
   margin-top: 10px;
   min-height: inherit;
   max-height: inherit; }
+  .transaction .input-group-addon {
+    width: 70px; }
   .transaction nav {
     position: absolute;
     bottom: 0;
@@ -165,11 +190,6 @@ html, body {
     .transaction nav .fa-user-plus {
       padding: 5px;
       width: 1.5em; }
-  .transaction .mainName {
-    background-color: #f0ad4e;
-    min-height: 50px;
-    padding: 15px 5px;
-    font-size: large; }
   .transaction #InputAmount {
     height: 45px; }
   .transaction .FriendList {
@@ -212,9 +232,7 @@ html, body {
   -webkit-overflow-scrolling: touch; }
 
 #Left .FriendsTransactions {
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  margin-top: 10px;
   height: inherit; }
   #Left .FriendsTransactions nav .fa-cog {
     padding: 5px 8px; }
