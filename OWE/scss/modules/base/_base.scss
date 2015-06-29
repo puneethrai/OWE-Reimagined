@@ -209,8 +209,11 @@ p {
 span {
     font-size: 1em;
 }
-.tooltip-inner {
-    font-size: 0.875em;
+.tooltip {
+    font-size: 1em !important;
+    .tooltip-inner {
+        font-size: 1.2em;
+    }
 }
 html, body {
     font: normal 18px/30px georgia,serif;
