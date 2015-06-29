@@ -78,7 +78,8 @@ define(['underscore', 'backbone', 'templates', './Views.Transaction.Friend', './
                 "tap .dummyDebt, .dummyCredit": "onAddAmount",
                 "tap .dummyBack": "onGoBack",
                 "submit .dummyForm": "onFormSubmit",
-                "tap .dummyShowSetting": "onRenderSetting"
+                "tap .dummyShowSetting": "onRenderSetting",
+                "tap .dummyContextual": "onShowNavText"
             });
         },
         onFormSubmit: function () {
