@@ -14,7 +14,8 @@ define(['backbone', 'templates', './Views.Friend.Transactions', 'jquery', 'jquer
         },
         events: {
             'tap .dummyNewTransaction': 'onNewTransactionView',
-            'tap .dummyShowSetting': 'onRenderSetting'
+            'tap .dummyShowSetting': 'onRenderSetting',
+            'tap .dummyContextual': 'onShowNavText'
         },
         render: function () {
             var self = this;

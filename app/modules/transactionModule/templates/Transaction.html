@@ -15,9 +15,21 @@
 	<div class="dummyFriendList FriendList"></div>
 </div>
 <nav class="navbar navbar-inverse col-xs-12 text-center nopadding dummyNav" role="navigation">
-	<i class="fa fa-arrow-left fa-2x dummyBack"></i>
-	<%if(isNew){%>
-		<i class="fa fa-user-plus fa-2x dummyNewFriend"></i>
-	<%}%>
-	<i class="fa fa-cog fa-2x dummyShowSetting"></i>
+	<div class="<%if(isNew){%>col-xs-offset-3 col-sm-offset-4<%} else {%>col-xs-offset-4 col-sm-offset-5<%}%> contain dummyNavContainer">
+		<div class="col-xs-3">
+			<i class="fa fa-arrow-left fa-2x dummyBack"></i>
+			<p class="nopadding white">Back</p>
+		</div>
+		<%if(isNew){%>
+			<div class="col-xs-3">
+				<i class="fa fa-user-plus fa-2x dummyNewFriend"></i>
+				<p class="nopadding white">Add Friend</p>
+			</div>
+		<%}%>
+		<div class="col-xs-3">
+			<i class="fa fa-cog fa-2x dummyShowSetting"></i>
+			<p class="nopadding white">Setting</p>
+		</div>
+	</div>
+	<i class="fa fa-ellipsis-h fa-2x pull-right contextual dummyContextual"></i>
 </nav>

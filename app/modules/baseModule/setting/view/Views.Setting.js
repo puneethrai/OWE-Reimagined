@@ -32,7 +32,8 @@ define(['underscore', 'backbone', 'templates', 'jquery', './Modal.EULA', 'viewHa
                 "tap .dummyPhotoAlbum": "onPhotoAlbum",
                 "tap .dummyRateApp": "onRateApp",
                 "tap .dummyRemoveImage": "onRemoveImage",
-                "tap .dummyEULA": "onEula"
+                "tap .dummyEULA": "onEula",
+                'tap .dummyContextual': 'onShowNavText'
             });
         },
         onAnimationEnded: function () {

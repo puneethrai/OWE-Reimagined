@@ -28,4 +28,7 @@ define(['backbone'], function (Backbone) {
     Backbone.View.prototype.animateNav = function () {
         this.$el.find('nav i').removeClass('animated bounceInUp').addClass('animated bounceInUp');
     };
+    Backbone.View.prototype.onShowNavText = function () {
+        this.$el.find('.dummyNavContainer').toggleClass('active');
+    };
 });

@@ -123,14 +123,14 @@ function showAndHide() {
 /**
  * Tries to read config.xml and override default properties and then shows and hides splashcreen if it is enabled.
  */
-(function initAndShow() {
-   /* configHelper.readConfig(function(config) {
+/*(function initAndShow() {
+    configHelper.readConfig(function(config) {
         readPreferencesFromCfg(config);
         showAndHide();
     }, function(err) {
         console.error(err);
-    });*/
-})();
+    });
+})();*/
 
 module.exports = SplashScreen;
 
