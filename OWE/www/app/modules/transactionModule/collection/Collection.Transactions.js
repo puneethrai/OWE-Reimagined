@@ -35,14 +35,28 @@ define(['backbone', '../model/Model.Transaction', "localforage", "localforagebac
             }
         },
         notifyTitle: function () {
-            LiveTiles.updateAppTile(null, null, {
+            /*LiveTiles.updateAppTile(null, null, {
                 title: 'Transactions',
                 image: 'www/image/' + (this.total < 0 ? 'appbar.owe.them.png' : 'appbar.owe.they.png'),
                 count: this.length,
                 backTitle: 'Transactions',
                 backContent: (this.total < 0 ? 'You' : 'They') + ' owe ' + (this.total < 0 ? 'them ' : 'you ') + Math.abs(this.total) + ' units',
                 backImage: 'Images/' + (this.total < 0 ? 'appbar.owe.them.png' : 'appbar.owe.they.png')
-            });
+            });*/
+            var tileOptions = {
+                tileType: 'flip',
+                Title: 'Transactions',
+                BackTitle: 'Transactions',
+                BackContent: (this.total < 0 ? 'You' : 'They') + ' owe ' + (this.total < 0 ? 'them ' : 'you ') + Math.abs(this.total) + ' units',
+                WideBackContent: (this.total < 0 ? 'You' : 'They') + ' owe ' + (this.total < 0 ? 'them ' : 'you ') + Math.abs(this.total) + ' units',
+                Count: this.length.toString(), // numeric value from 0 to 99
+                SmallBackgroundImage: 'www/image/' + (this.total < 0 ? 'appbar.owe.them.png' : 'appbar.owe.they.png'),
+                BackgroundImage: 'www/image/' + (this.total < 0 ? 'appbar.owe.them.png' : 'appbar.owe.they.png'),
+                BackBackgroundImage: '',
+                WideBackgroundImage: '',
+                WideBackBackgroundImage: ''
+            };
+            window.plugins.UpdateLiveTile.updateTile(null, null, tileOptions);
         }
     });
     return TransactionCollection;

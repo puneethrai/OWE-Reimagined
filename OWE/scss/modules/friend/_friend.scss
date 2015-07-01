@@ -7,12 +7,7 @@
 #Left {
     .FriendsTransactions {
         margin-top: 10px;
-        height: inherit;   
-        nav {
-            .fa-cog {
-                padding: 5px 8px;
-            }
-        }
+        height: inherit;
         .FriendTransactions {
             margin-bottom: 10px;
             &:last-child {

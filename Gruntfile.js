@@ -181,7 +181,8 @@ module.exports = function (grunt) {
                         'cordova-plugin-camera',
                         'com.msopentech.websql',
                         'com.risingj.cordova.livetiles',
-                        'de.appplant.cordova.plugin.local-notification'
+                        'de.appplant.cordova.plugin.local-notification',
+                        'com.kolwit.updatelivetile'
                     ]
                 }
             },
@@ -200,7 +201,8 @@ module.exports = function (grunt) {
                         'cordova-plugin-camera',
                         'com.msopentech.websql',
                         'com.risingj.cordova.livetiles',
-                        'de.appplant.cordova.plugin.local-notification'
+                        'de.appplant.cordova.plugin.local-notification',
+                        'com.kolwit.updatelivetile'
                     ]
                 }
             },
