@@ -1,8 +1,15 @@
 <p class="dummyIndividualAmount">
 	<i class="fa fa-sign-<%if(model.type=== TYPE.DEBT){%>out<%} else {%>in<%}%> fa-2x pull-left"></i>
-	<span class="dumyUserAmount userAmount"><%=model.amount%></span>
-	<i class="fa <%if(model.deleted){%>fa-trash dummyDestroy<%} else {%>fa-times-circle dummyDelete<%}%> fa-2x pull-right cursor-pointer"></i>
+	<span class="dumyUserAmount userAmount lead">
+		<%=model.amount%>
+	</span>
+	<span class="pull-right">
+		<i class="fa fa-undo fa-2x dummyUndo <%if(!model.deleted){%>hide<%}%>"></i>
+		<i class="fa <%if(model.deleted){%>fa-trash dummyDestroy<%} else {%>fa-times-circle dummyDelete<%}%> fa-2x cursor-pointer"></i>
+	</span>
 </p>
 <%if (model.date) {%>
-	<span class="date"><%=date%></span>
+	<span class="date">
+		<%=date%>
+	</span>
 <%}%>

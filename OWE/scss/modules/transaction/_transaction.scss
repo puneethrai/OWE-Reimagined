@@ -13,14 +13,15 @@
             padding: 5px;
             width: 1.5em;
         }
-    }    #InputAmount {
-        height: 45px;
+    }
+    #InputAmount {
         //6+6+16+16
+        height: 45px;
     }
     .FriendList {
         @include overflow-y-with-ios();
         .FriendTransaction {
-            background-color: #FFF;
+            background-color: #fff;
             padding: 1% 2%;
             min-height: 35px;
             position: relative;
@@ -44,10 +45,9 @@
             }
             p {
                 margin: 0;
-                span {
-                    vertical-align: sub;
-                    font-size: 20px;
-                }
+            }
+            .fa-undo {
+                margin-right: 0.5em;
             }
             .date {
                 position: absolute;

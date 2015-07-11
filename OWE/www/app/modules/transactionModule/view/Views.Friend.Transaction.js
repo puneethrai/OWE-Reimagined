@@ -27,19 +27,25 @@ define(['underscore', 'backbone', 'templates', 'jquery', 'jqueryTap', 'jquerymov
             return _.extend(window.app.getAnimationListner('onAnimationEnded'), {
                 "tap .dummyDelete": "onDelete",
                 "tap .dummyDestroy": "onDestroyTransaction",
+                "tap .dummyUndo": "onUndoTransaction",
                 "swiperight" : "onDelete"
             });
         },
         onDelete: function () {
             this.model.set('deleted', true).save();
         },
+        onUndoTransaction: function () {
+            this.model.set('deleted', false).save();
+        },
         onDeleted: function (model, value) {
             /*jslint unparam:true*/
             if (value) {
                 this.$el.addClass('deleted');
+                this.$el.find('.dummyUndo').removeClass('hide');
                 this.$el.find('.dummyDelete').removeClass('fa-times-circle dummyDelete').addClass('fa-trash dummyDestroy');
             } else {
                 this.$el.removeClass('deleted');
+                this.$el.find('.dummyUndo').addClass('hide');
                 this.$el.find('.dummyDestroy').removeClass('fa-trash dummyDestroy').addClass('fa-times-circle dummyDelete');
             }
         },
