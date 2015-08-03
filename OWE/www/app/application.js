@@ -22,12 +22,18 @@ define(function (require) {
             globalContext.addSettings(settings);
             window.app = {
                 context: globalContext,
+                modules: '01',
+                MODULES: {
+                    TRANSACTION: '0',
+                    FRIEND: '1'
+                },
                 Events: {
                     Migration: {
                         TransactionsData: "Events.Migration.TransactionData",
                         FriendsData: "Events.Migration.FriendsData",
                         Migrated: "Events.Migration.Migrated",
                         Clear: "Events.Migration.Clear",
+                        Completed: "Events.Migration.Completed"
                     },
                     RateApp: "Events.RateApp"
                 },
@@ -42,7 +48,8 @@ define(function (require) {
                     var url;
                     switch (cordova.platformId) {
                     case 'windowsphone':
-                        url = encodeURI('zune://navigate?appid=' + this.context.getSettings().appID.wp);
+                        url = encodeURI('zune://navigate?appid=' + this.context.getSettings()
+                            .appID.wp);
                         break;
                     }
                     if (url) {
@@ -52,15 +59,18 @@ define(function (require) {
                 scrollDown: function (scrollToValue, scrollwindow) {
                     if ($.fn.animate) {
                         // Or you can animate the scrolling:Performance might get affected
-                        $(scrollwindow || "body").animate({
-                            scrollTop: scrollToValue
-                        });
+                        $(scrollwindow || "body")
+                            .animate({
+                                scrollTop: scrollToValue
+                            });
                     } else {
-                        $(scrollwindow || "body").scrollTop(scrollToValue);
+                        $(scrollwindow || "body")
+                            .scrollTop(scrollToValue);
                     }
                 },
                 scrollStop: function (scrollwindow) {
-                    $(scrollwindow || "body").stop();
+                    $(scrollwindow || "body")
+                        .stop();
                 },
                 getAnimationListner: function (functionName) {
                     return {
@@ -85,26 +95,36 @@ define(function (require) {
              * to create a 'Context' tree (product modules as a tree).
              */
             var index = 0;
-            $(window).on("resize", this.updateView);
-            $(window).on("orientationchange", this.updateView);
+            $(window)
+                .on("resize", this.updateView);
+            $(window)
+                .on("orientationchange", this.updateView);
             for (index = (modules.length - 1); index >= 0; index--) {
                 modules[index].initialize(window.app.context);
             }
-            window.app.context.listen(window.app.Events.Migration.Migrated, function () {
-                Backbone.history.navigate('', {replace: true});
-                if (!Backbone.History.started) {
-                    Backbone.history.start();
+            window.app.context.listen(window.app.Events.Migration.Completed, function (module) {
+                window.app.modules = window.app.modules.replace(module, '');
+                if (!window.app.modules.length) {
+                    Backbone.history.navigate('', {
+                        replace: true
+                    });
+                    if (!Backbone.History.started) {
+                        Backbone.history.start();
+                    }
                 }
             });
             this.updateView();
         },
         updateView: function () {
-            var height = $(window).height(),
-                width = $(window).width();
-            $('#Left, #Right').css({
-                'min-height': height,
-                'max-height': height
-            });
+            var height = $(window)
+                .height(),
+                width = $(window)
+                .width();
+            $('#Left, #Right')
+                .css({
+                    'min-height': height,
+                    'max-height': height
+                });
             viewHandler.onWindowResize(height, width);
         }
     };

@@ -30,6 +30,7 @@ define(['underscore', 'backbone', '../collection/Collection.Transactions', '../v
             window.app.context.listen(window.app.Events.Migration.Migrated, function () {
                 if (!self.TransactionCollection.models.length) {
                     self.TransactionCollection.fetch();
+                    window.app.context.notify(window.app.Events.Migration.Completed, window.app.MODULES.TRANSACTION);
                 }
             });
             _.bindAll(this, 'onCompleted');

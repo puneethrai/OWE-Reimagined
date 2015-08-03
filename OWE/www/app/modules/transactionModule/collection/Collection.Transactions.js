@@ -1,4 +1,5 @@
 /*globals define, LiveTiles*/
+/*jslint sloppy:true, nomen: true, browser: true*/
 define(['backbone', '../model/Model.Transaction', "localforage", "localforagebackbone"], function (Backbone, TransactionModel) {
     var TransactionCollection = Backbone.Collection.extend({
         total: 0,
@@ -35,14 +36,6 @@ define(['backbone', '../model/Model.Transaction', "localforage", "localforagebac
             }
         },
         notifyTitle: function () {
-            /*LiveTiles.updateAppTile(null, null, {
-                title: 'Transactions',
-                image: 'www/image/' + (this.total < 0 ? 'appbar.owe.them.png' : 'appbar.owe.they.png'),
-                count: this.length,
-                backTitle: 'Transactions',
-                backContent: (this.total < 0 ? 'You' : 'They') + ' owe ' + (this.total < 0 ? 'them ' : 'you ') + Math.abs(this.total) + ' units',
-                backImage: 'Images/' + (this.total < 0 ? 'appbar.owe.them.png' : 'appbar.owe.they.png')
-            });*/
             var tileOptions = {
                 tileType: 'flip',
                 Title: 'Transactions',

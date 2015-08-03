@@ -26,6 +26,7 @@ define(['backbone', '../collection/Collection.Friends', '../view/Views.Friends.T
                 if (!self.FriendCollection.models.length) {
                     self.FriendCollection.fetch({
                         success: function () {
+                            window.app.context.notify(window.app.Events.Migration.Completed, window.app.MODULES.FRIEND);
                             if (!self.FriendCollection.findWhere({special: 'noname'})) {
                                 self.FriendCollection.create({special: 'noname', name: 'No Name'});
                             }
