@@ -7,3 +7,7 @@ Demo:  http://puneethrai.github.io/OWE-Reimagined
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/puneethrai/owe-reimagined/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/puneethrai/owe-reimagined/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
